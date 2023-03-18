@@ -22,6 +22,11 @@ namespace API_Rincones.Services
         {
             return _photoLogic.GetAllPhotos();
         }
+
+        public PhotoItem GetPhotoById(int id)
+        {
+            return _photoLogic.GetPhotoById(id);
+        }
         public List<PhotoItem> GetPhotosByFilter(PhotoFilter photoFilter)
         {
             return _photoLogic.GetPhotosByFilter(photoFilter);

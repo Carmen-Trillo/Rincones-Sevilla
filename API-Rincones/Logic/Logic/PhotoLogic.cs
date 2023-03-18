@@ -6,6 +6,8 @@ using Logic.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,6 +34,13 @@ namespace Logic.Logic
         public List<PhotoItem> GetAllPhotos()
         {
             return _serviceContext.Set<PhotoItem>().ToList();
+        }
+
+        public PhotoItem GetPhotoById(int id)
+        {
+            return  _serviceContext.Set<PhotoItem>()
+                    .Where(u => u.Id == id).First();
+
         }
 
         public List<PhotoItem> GetPhotosByFilter(PhotoFilter photoFilter)

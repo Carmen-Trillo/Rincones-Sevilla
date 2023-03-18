@@ -9,6 +9,7 @@ namespace API_Rincones.IService
         void UpdatePhoto(PhotoItem photoItem);
         void DeletePhoto(int id);
         List<PhotoItem> GetAllPhotos();
+        PhotoItem GetPhotoById(int id);
         List<PhotoItem> GetPhotosByFilter(PhotoFilter photoFilter);
     }
 }

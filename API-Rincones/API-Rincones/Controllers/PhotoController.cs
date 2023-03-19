@@ -33,6 +33,7 @@ namespace API_Rincones.Controllers
                 photoItem.InsertDate = DateTime.Now;
                 photoItem.UpdateDate = DateTime.Now;
                 photoItem.FileExtension = photoUploadModel.FileExtension;
+                photoItem.IsActive = photoUploadModel.IsActive;
 
                 using (var stream = new MemoryStream())
                 {
@@ -56,32 +57,13 @@ namespace API_Rincones.Controllers
             }
 
         [HttpPatch(Name = "UpdatePhoto")]
-        //public void Patch([FromBody] PhotoItem photoitem, [FromForm] PhotoUploadModel photoUploadModel)
-        //  {
-        //var photoItem = new PhotoItem();
-        //photoItem.Id = 0;
-        //photoItem.Name = photoUploadModel.File.FileName;
-        //photoItem.Title = photoUploadModel.Title;
-        //photoItem.Description = photoUploadModel.Description;
-        //photoItem.InsertDate = DateTime.Now;
-        //photoItem.UpdateDate = DateTime.Now;
-        // photoItem.FileExtension = photoUploadModel.FileExtension;
-
-        //using (var stream = new MemoryStream())
-        //{
-        //photoUploadModel.File.CopyTo(stream);
-        //photoItem.Content = stream.ToArray();
-        //}
-
-        //_photoServices.UpdatePhoto(photoItem);
-        //
-
         public void Patch(int id, [FromForm] PhotoUploadModel photoUploadModel)
         {
             var photoItem = _photoServices.GetPhotoById(id);
 
             photoItem.Title = photoUploadModel.Title;
             photoItem.Description = photoUploadModel.Description;
+            photoItem.IsActive = photoUploadModel.IsActive;
             photoItem.UpdateDate = DateTime.Now;
 
             if (photoUploadModel.File != null)

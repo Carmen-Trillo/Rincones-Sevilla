@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20230318213503_Initial")]
+    [Migration("20230319105645_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -43,9 +43,6 @@ namespace Data.Migrations
 
                     b.Property<int>("FileExtension")
                         .HasColumnType("int");
-
-                    b.Property<Guid>("IdWeb")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime2");

@@ -41,9 +41,6 @@ namespace Data.Migrations
                     b.Property<int>("FileExtension")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("IdWeb")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime2");
 

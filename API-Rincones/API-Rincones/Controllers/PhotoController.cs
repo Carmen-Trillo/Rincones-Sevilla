@@ -5,6 +5,7 @@ using Entities.Entities;
 using Entities.SearchFilter;
 using API_Rincones.IService;
 using Microsoft.AspNetCore.Mvc.Filters;
+using API.Enums;
 
 namespace API_Rincones.Controllers
 {
@@ -55,7 +56,27 @@ namespace API_Rincones.Controllers
             }
 
         [HttpPatch(Name = "UpdatePhoto")]
-        ublic void Patch(int id, [FromForm] PhotoUploadModel photoUploadModel)
+        //public void Patch([FromBody] PhotoItem photoitem, [FromForm] PhotoUploadModel photoUploadModel)
+        //  {
+        //var photoItem = new PhotoItem();
+        //photoItem.Id = 0;
+        //photoItem.Name = photoUploadModel.File.FileName;
+        //photoItem.Title = photoUploadModel.Title;
+        //photoItem.Description = photoUploadModel.Description;
+        //photoItem.InsertDate = DateTime.Now;
+        //photoItem.UpdateDate = DateTime.Now;
+        // photoItem.FileExtension = photoUploadModel.FileExtension;
+
+        //using (var stream = new MemoryStream())
+        //{
+        //photoUploadModel.File.CopyTo(stream);
+        //photoItem.Content = stream.ToArray();
+        //}
+
+        //_photoServices.UpdatePhoto(photoItem);
+        //
+
+        public void Patch(int id, [FromForm] PhotoUploadModel photoUploadModel)
         {
             var photoItem = _photoServices.GetPhotoById(id);
 
@@ -66,7 +87,7 @@ namespace API_Rincones.Controllers
             if (photoUploadModel.File != null)
             {
                 photoItem.Name = photoUploadModel.File.FileName;
-                photoItem.FileExtension = Path.GetExtension(photoUploadModel.File.FileName);
+                photoItem.FileExtension = (FileExtensionEnum)Enum.Parse(typeof(FileExtensionEnum), Path.GetExtension(photoUploadModel.File.FileName).Substring(1), true);
 
                 using (var stream = new MemoryStream())
                 {

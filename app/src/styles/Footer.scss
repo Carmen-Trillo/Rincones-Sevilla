@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'Atwriter';
+    src: url('./assets/font/atwriter.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Jmh';
+    src: url('./assets/font/jmh.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Mom';
+    src: url('./assets/font/mom.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Rough';
+    src: url('./assets/font/rough.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+#footer{
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    padding: 1vh;
+    p{
+        font-family: 'Jmh';
+        color: white;
+    }
+    img{
+        width: 2vw;
+        margin-left: 0.5vw
+    }
+}

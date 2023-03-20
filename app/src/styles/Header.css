@@ -22,21 +22,49 @@
   font-style: normal;
   font-weight: normal;
 }
-* {
-  box-sizing: border-box;
+#header {
   margin: auto;
-  padding: 0%;
+  background-color: #000000;
+  padding: 1.5vh;
+  padding-bottom: 3vh;
 }
 
 h1 {
+  color: white;
   text-align: center;
   font-family: "Rough";
   font-weight: 100;
-  margin-bottom: -6vh;
+  margin-bottom: 1vh;
   font-size: 60px;
 }
 
-p {
-  font-size: "Mom";
+nav {
+  text-align: center;
+  color: white;
+  max-width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 4vh;
+  font-family: Jmh;
+  margin-top: 2vh;
+}
+nav li {
+  display: inline-block;
+  margin-top: 1vh;
+  padding: 10px;
+  font-size: 15px;
+  font-family: courier;
   font-size: 20px;
-}/*# sourceMappingURL=index.css.map */
+}
+nav img {
+  width: 1vw;
+  margin-top: 0.5vh;
+  margin-left: 0.5vw;
+}
+nav p {
+  font-size: 20px;
+  text-align: center;
+  margin-left: 0.4vw;
+}/*# sourceMappingURL=Header.css.map */

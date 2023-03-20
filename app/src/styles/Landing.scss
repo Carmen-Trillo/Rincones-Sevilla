@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'Atwriter';
+    src: url('./assets/font/atwriter.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Jmh';
+    src: url('./assets/font/jmh.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Mom';
+    src: url('./assets/font/mom.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Rough';
+    src: url('./assets/font/rough.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+#conteiner {
+   background-image: url(../assets/img/filella.jpg);
+   background-position: top; 
+   background-repeat: no-repeat; 
+   background-size: container;
+   background-size: cover;
+   height: 75vh;
+   padding-top: 5vh;
+}
+
+#card {
+    width: 50vw;
+    margin-left: 5vw;
+    background-color: white;
+    padding: 2vh 1vw;
+    border-radius: 5px;
+    h2{
+        font-family: 'Rough';
+        font-size: 38px;
+        text-align: center;
+    }
+    p {
+        font-family: 'Jmh';
+        font-size: 20px;
+        margin-bottom: 2vh;
+    }
+    button{
+        text-align: center;
+        width: 8vw;
+        height: 5vh;
+        font-family: 'Atwriter';
+        font-size: 18px;
+        text-transform: uppercase;
+        border-radius: 5px;
+    }
+}

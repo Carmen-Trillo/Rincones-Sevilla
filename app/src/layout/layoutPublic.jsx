@@ -1,6 +1,6 @@
 import { Outlet, useNavigation } from "react-router-dom";
-/* import Navbar from "../components/Navbar";
-import Footer from "../components/Footer"; */
+import Header from "../components/Header";
+// import Footer from "../components/Footer";
 
 const LayoutPublic = () => {
 
@@ -8,7 +8,7 @@ const LayoutPublic = () => {
 
     return (
         <>
-            {/* <Navbar /> */}
+            <Header />
             <Outlet />
             {/* <Footer /> */}
         </>

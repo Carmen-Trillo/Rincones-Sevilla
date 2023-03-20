@@ -6,10 +6,11 @@ using Entities.SearchFilter;
 using API_Rincones.IService;
 using Microsoft.AspNetCore.Mvc.Filters;
 using API.Enums;
+using System.Web.Http.Cors;
 
 namespace API_Rincones.Controllers
 {
-    [ApiController]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Route("[controller]/[action]")]
     public class PhotoController : ControllerBase
     {
@@ -50,11 +51,17 @@ namespace API_Rincones.Controllers
                 return _photoServices.GetAllPhotos();
             }
 
+        [HttpGet(Name = "GetPhotosById")]
+        public PhotoItem GetPhotosById(int id)
+        {
+            return _photoServices.GetPhotoById(id);
+        }
+
         [HttpGet(Name = "GetPhotosByFilter")]
-            public List<PhotoItem> GetPhotosByFilter([FromBody] PhotoFilter photoFilter)
-            {
-                return _photoServices.GetPhotosByFilter(photoFilter);
-            }
+        public List<PhotoItem> GetPhotosByFilter([FromQuery] PhotoFilter photoFilter)
+        {
+            return _photoServices.GetPhotosByFilter(photoFilter);
+        }
 
         [HttpPatch(Name = "UpdatePhoto")]
         public void Patch(int id, [FromForm] PhotoUploadModel photoUploadModel)

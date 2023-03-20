@@ -97,3 +97,9 @@ C:\Users\mctri\FactoriaF5-FemCoder\proyectos\Rincones-Sevilla\API-Rincones\API-R
 C:\Users\mctri\FactoriaF5-FemCoder\proyectos\Rincones-Sevilla\API-Rincones\API-Rincones\obj\Debug\net6.0\API-Rincones.pdb
 C:\Users\mctri\FactoriaF5-FemCoder\proyectos\Rincones-Sevilla\API-Rincones\API-Rincones\obj\Debug\net6.0\API-Rincones.genruntimeconfig.cache
 C:\Users\mctri\FactoriaF5-FemCoder\proyectos\Rincones-Sevilla\API-Rincones\API-Rincones\obj\Debug\net6.0\ref\API-Rincones.dll
+C:\Users\mctri\FactoriaF5-FemCoder\proyectos\Rincones-Sevilla\API-Rincones\API-Rincones\bin\Debug\net6.0\System.Web.Cors.dll
+C:\Users\mctri\FactoriaF5-FemCoder\proyectos\Rincones-Sevilla\API-Rincones\API-Rincones\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\mctri\FactoriaF5-FemCoder\proyectos\Rincones-Sevilla\API-Rincones\API-Rincones\bin\Debug\net6.0\System.Web.Http.dll
+C:\Users\mctri\FactoriaF5-FemCoder\proyectos\Rincones-Sevilla\API-Rincones\API-Rincones\bin\Debug\net6.0\System.Web.Http.Cors.dll
+C:\Users\mctri\FactoriaF5-FemCoder\proyectos\Rincones-Sevilla\API-Rincones\API-Rincones\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\mctri\FactoriaF5-FemCoder\proyectos\Rincones-Sevilla\API-Rincones\API-Rincones\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

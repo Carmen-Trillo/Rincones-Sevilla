@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Security.Authentication;
-using System.Xml.Linq;
+﻿using API.Enums;
+using API_Rincones.IService;
 using Entities.Entities;
 using Entities.SearchFilter;
-using API_Rincones.IService;
-using Microsoft.AspNetCore.Mvc.Filters;
-using API.Enums;
+using Microsoft.AspNetCore.Mvc;
 using System.Web.Http.Cors;
-using System.Text;
 
 namespace API_Rincones.Controllers
 {
@@ -24,7 +20,7 @@ namespace API_Rincones.Controllers
         }
 
         [HttpPost(Name = "InsertPhoto")]
-        public int InsertPhoto([FromForm] PhotoUploadModel photoUploadModel)
+        public async Task<int> InsertPhoto([FromForm] PhotoUploadModel photoUploadModel)
         {
             var photoItem = new PhotoItem
             {
@@ -41,38 +37,36 @@ namespace API_Rincones.Controllers
             // Convert the image content to a byte array
             using (var stream = new MemoryStream())
             {
-                photoUploadModel.File.CopyTo(stream);
+                await photoUploadModel.File.CopyToAsync(stream);
                 byte[] bytes = stream.ToArray();
                 photoItem.Content = Convert.ToBase64String(bytes);
             }
 
-
-            return _photoServices.InsertPhoto(photoItem);
+            return await _photoServices.InsertPhoto(photoItem);
         }
 
-
         [HttpGet(Name = "GetAllPhotos")]
-            public List<PhotoItem> GetAllPhotos()
-            {
-                return _photoServices.GetAllPhotos();
-            }
+        public async Task<List<PhotoItem>> GetAllPhotos()
+        {
+            return await _photoServices.GetAllPhotos();
+        }
 
         [HttpGet(Name = "GetPhotosById")]
-        public PhotoItem GetPhotosById(int id)
+        public async Task<PhotoItem> GetPhotosById(int id)
         {
-            return _photoServices.GetPhotoById(id);
+            return await _photoServices.GetPhotoById(id);
         }
 
         [HttpGet(Name = "GetPhotosByFilter")]
-        public List<PhotoItem> GetPhotosByFilter([FromQuery] PhotoFilter photoFilter)
+        public async Task<List<PhotoItem>> GetPhotosByFilter([FromQuery] PhotoFilter photoFilter)
         {
-            return _photoServices.GetPhotosByFilter(photoFilter);
+            return await _photoServices.GetPhotosByFilter(photoFilter);
         }
 
         [HttpPatch(Name = "UpdatePhoto")]
-        public void Patch(int id, [FromForm] PhotoUploadModel photoUploadModel)
+        public async Task Patch(int id, [FromForm] PhotoUploadModel photoUploadModel)
         {
-            var photoItem = _photoServices.GetPhotoById(id);
+            var photoItem = await _photoServices.GetPhotoById(id);
 
             photoItem.Title = photoUploadModel.Title;
             photoItem.Description = photoUploadModel.Description;
@@ -84,22 +78,20 @@ namespace API_Rincones.Controllers
                 photoItem.FileExtension = (FileExtensionEnum)Enum.Parse(typeof(FileExtensionEnum), Path.GetExtension(photoUploadModel.File.FileName).Substring(1), true);
                 using (var stream = new MemoryStream())
                 {
-                    photoUploadModel.File.CopyTo(stream);
+                    await photoUploadModel.File.CopyToAsync(stream);
                     byte[] bytes = stream.ToArray();
                     photoItem.Content = Convert.ToBase64String(bytes);
                 }
 
             }
 
-            _photoServices.InsertPhoto(photoItem);
+            await _photoServices.InsertPhoto(photoItem);
         }
 
-
         [HttpDelete(Name = "DeletePhoto")]
-        public void Delete([FromQuery] int id)
-            {
-                _photoServices.DeletePhoto(id);
-            }
-
+        public async Task Delete([FromQuery] int id)
+        {
+            await _photoServices.DeletePhoto(id);
+        }
     }
 }

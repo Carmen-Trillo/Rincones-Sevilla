@@ -1,4 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
+import Dashboard from '../components/Dashboard';
+import '../../src/index.css';
+import '../styles/PhotoList.css';
 
 
 export default function PhotoList() {
@@ -7,7 +10,8 @@ export default function PhotoList() {
 
 return (
     <>
-    <div id="container">
+    <div id='container'>
+    {/* <div id="container">
         {
         Photos.map((item) => 
             <div key={item.id}>
@@ -17,6 +21,8 @@ return (
             </div>
                 )
         }
+    </div> */}
+        <Dashboard />
     </div>
     </>
     )        

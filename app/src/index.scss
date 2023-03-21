@@ -26,6 +26,13 @@
     font-weight: normal;
 }
 
+@font-face {
+    font-family: 'Cream';
+    src: url('./assets/font/Cream.otf') format('opentype');
+    font-style: normal;
+    font-weight: normal;
+}
+
 * {
     box-sizing: border-box;
     margin:auto;
@@ -42,6 +49,5 @@ h1 {
 
 p {
     font-size: 'Mom';
-    font-size: 20px;
 }
 

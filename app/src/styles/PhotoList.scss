@@ -1,0 +1,21 @@
+#container {
+    background-image: url(../assets/img/filella.jpg);
+    background-position: top; 
+    background-repeat: no-repeat; 
+    background-size: container;
+    background-size: cover;
+    height: 75vh;
+    padding-top: 5vh;
+}
+
+#dashboard {
+    text-align: center;
+    font-family: 'Jmh';
+    font-size: 14px;
+}
+
+#gallery{
+    display: flex;
+    flex-direction: row;
+    grid-template-columns: repeat(4 1fr);
+}

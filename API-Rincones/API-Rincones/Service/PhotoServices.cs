@@ -9,37 +9,42 @@ namespace API_Rincones.Services
     public class PhotoServices : IPhotoServices
     {
         private readonly IPhotoLogic _photoLogic;
+
         public PhotoServices(IPhotoLogic photoLogic)
         {
             _photoLogic = photoLogic;
         }
-        public int InsertPhoto(PhotoItem photoItem)
+
+        public async Task<int> InsertPhoto(PhotoItem photoItem)
         {
-            _photoLogic.InsertPhoto(photoItem);
+            await _photoLogic.InsertPhoto(photoItem);
             return photoItem.Id;
         }
-        public List<PhotoItem> GetAllPhotos()
+
+        public async Task<List<PhotoItem>> GetAllPhotos()
         {
-            return _photoLogic.GetAllPhotos();
+            return await _photoLogic.GetAllPhotos();
         }
 
-        public PhotoItem GetPhotoById(int id)
+        public async Task<PhotoItem> GetPhotoById(int id)
         {
-            return _photoLogic.GetPhotoById(id);
-        }
-        public List<PhotoItem> GetPhotosByFilter(PhotoFilter photoFilter)
-        {
-            return _photoLogic.GetPhotosByFilter(photoFilter);
+            return await _photoLogic.GetPhotoById(id);
         }
 
-        public void UpdatePhoto(PhotoItem photoItem)
+        public async Task<List<PhotoItem>> GetPhotosByFilter(PhotoFilter photoFilter)
         {
-            _photoLogic.UpdatePhoto(photoItem);
+            return await _photoLogic.GetPhotosByFilter(photoFilter);
         }
 
-        public void DeletePhoto(int id)
+        public async Task UpdatePhoto(PhotoItem photoItem)
         {
-            _photoLogic.DeletePhoto(id);
+            await _photoLogic.UpdatePhoto(photoItem);
+        }
+
+        public async Task DeletePhoto(int id)
+        {
+            await _photoLogic.DeletePhoto(id);
         }
     }
 }
+

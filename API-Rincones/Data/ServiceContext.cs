@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System.Reflection.Emit;
 
 namespace Data
 {
@@ -12,8 +13,9 @@ namespace Data
         public DbSet<PhotoItem> Photos { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<PhotoItem>()
-            .ToTable("Photos");
+            builder.Entity<PhotoItem>().ToTable("Photos");
+            builder.Entity<PhotoItem>().HasKey(p => p.Id);
+
 
             foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {

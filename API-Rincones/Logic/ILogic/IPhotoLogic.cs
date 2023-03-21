@@ -10,12 +10,12 @@ namespace Logic.ILogic
 {
     public interface IPhotoLogic
     {
-        int InsertPhoto(PhotoItem photoItem);
-        void UpdatePhoto(PhotoItem photoItem);
-        void DeletePhoto(int id);
-        List<PhotoItem> GetAllPhotos();
-        PhotoItem GetPhotoById(int id);
-        List<PhotoItem> GetPhotosByFilter(PhotoFilter photoFilter);
+        Task<int> InsertPhoto(PhotoItem photoItem);
+        Task UpdatePhoto(PhotoItem photoItem);
+        Task DeletePhoto(int id);
+        Task<List<PhotoItem>> GetAllPhotos();
+        Task<PhotoItem> GetPhotoById(int id);
+        Task<List<PhotoItem>> GetPhotosByFilter(PhotoFilter photoFilter);
     }
 }
 

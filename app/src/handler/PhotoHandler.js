@@ -1,7 +1,7 @@
 import PhotoServices from "../services/PhotoServices";
 
 const PhotoHandler = {
-    addPhoto(newPhoto){
+    /* addPhoto(newPhoto){
         if (!newPhoto) {
             return;
         }
@@ -18,11 +18,11 @@ const PhotoHandler = {
             "id": ""
         }
         return PhotoServices.submitPhoto(Photo);
-    },
-    loadPhotos(){
+    }, */
+    /* loadPhotos(){
         return PhotoServices.getPhotos();
-    },
-    loadPhoto(id) {
+    }, */
+    /* loadPhoto(id) {
         return PhotoServices.getPhoto(id);
     },
     deletePhoto(id){
@@ -43,7 +43,7 @@ const PhotoHandler = {
             "id": ""
         }
         return PhotoServices.updatePhoto(id, updatedPhotoStructure);
-    },
+    }, */
 }
 
 export default PhotoHandler;

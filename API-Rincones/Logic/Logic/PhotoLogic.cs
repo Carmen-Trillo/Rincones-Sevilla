@@ -2,12 +2,10 @@
 using Entities.Entities;
 using Entities.SearchFilter;
 using Logic.ILogic;
-using Logic.Logic;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,29 +19,29 @@ namespace Logic.Logic
             _serviceContext = serviceContext;
         }
 
-        public void DeletePhoto(int id)
+        public async Task DeletePhoto(int id)
         {
-            var photoToDelete = _serviceContext.Set<PhotoItem>()
-            .Where(u => u.Id == id).First();
+            var photoToDelete = await _serviceContext.Set<PhotoItem>()
+            .Where(u => u.Id == id).FirstAsync();
 
             photoToDelete.IsActive = false;
 
-            _serviceContext.SaveChanges();
+            await _serviceContext.SaveChangesAsync();
         }
 
-        public List<PhotoItem> GetAllPhotos()
+        public async Task<List<PhotoItem>> GetAllPhotos()
         {
-            return _serviceContext.Set<PhotoItem>().ToList();
+            return await _serviceContext.Set<PhotoItem>().ToListAsync();
         }
 
-        public PhotoItem GetPhotoById(int id)
+        public async Task<PhotoItem> GetPhotoById(int id)
         {
-            return  _serviceContext.Set<PhotoItem>()
-                    .Where(u => u.Id == id).First();
+            return await _serviceContext.Set<PhotoItem>()
+                    .Where(u => u.Id == id).FirstAsync();
 
         }
 
-        public List<PhotoItem> GetPhotosByFilter(PhotoFilter photoFilter)
+        public async Task<List<PhotoItem>> GetPhotosByFilter(PhotoFilter photoFilter)
         {
             var resultList = _serviceContext.Set<PhotoItem>()
                         .Where(u => u.IsActive == true);
@@ -58,22 +56,20 @@ namespace Logic.Logic
                 resultList = resultList.Where(u => u.InsertDate < photoFilter.InsertDateTo);
             }
 
-            return resultList.ToList();
+            return await resultList.ToListAsync();
         }
 
-        public int InsertPhoto(PhotoItem photoItem)
+        public async Task<int> InsertPhoto(PhotoItem photoItem)
         {
             _serviceContext.Photos.Add(photoItem);
-            _serviceContext.SaveChanges();
+            await _serviceContext.SaveChangesAsync();
             return photoItem.Id;
         }
 
-        public void UpdatePhoto(PhotoItem photoItem)
+        public async Task UpdatePhoto(PhotoItem photoItem)
         {
             _serviceContext.Photos.Update(photoItem);
-            _serviceContext.SaveChanges();
+            await _serviceContext.SaveChangesAsync();
         }
     }
 }
-
-

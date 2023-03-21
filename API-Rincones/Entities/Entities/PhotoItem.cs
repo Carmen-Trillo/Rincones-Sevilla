@@ -14,7 +14,10 @@ namespace Entities.Entities
         public string Name { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public byte[] Content { get; set; }
+        //public byte[] Content { get; set; }
+        //public Stream Content { get; set; }
+
+        public string Content { get; set; }
         public DateTime InsertDate { get; set; }
         public DateTime? UpdateDate { get; set; }
         public bool IsActive { get; set; }

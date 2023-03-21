@@ -1,7 +1,7 @@
 /* var baseURL = 'https://localhost:7125/Photo/'
 
-const PhotoServices = { */
-   /*  GetAllPhotos: async function () {
+const PhotoServices = {
+GetAllPhotos: async function () {
         return await fetch(baseURL + "GetAllPhotos")
             .then(res => res.json())
             .then(
@@ -19,8 +19,8 @@ const PhotoServices = { */
         //         "Content-Type": "application/json",
         //     },
         // });
-/*     }
-} */
+
+
 
     /* async getPhoto(id) {
         let response = await baseURL.get("/photos/" + id);
@@ -41,9 +41,10 @@ const PhotoServices = { */
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:7125/',
+    baseURL: 'https://localhost:7125/Photo',
     withCredentials: false,
     headers: {
+    //  'Access-Control-Allow-Origin': '*',
       Accept: 'application/json',
       'Content-Type': 'application/json'
     }
@@ -51,24 +52,27 @@ const apiClient = axios.create({
 
 const PhotoServices = {
     async getPhotos() {
-        let response = await apiClient.get("Photo/GetAllPhotos/");
+        let response = await apiClient.get("/GetAllPhotos");
         let allPhotos = response.data;
         return allPhotos;
     },
-    async getPhoto(id) {
-        let response = await apiClient.get("Photo/GetPhotosById/" + id);
+}
+
+
+   /*  async getPhoto(id) {
+        let response = await apiClient.get("/Photo/GetPhotosById/" + id);
         let photo = response.data;
         return photo;
     },
     async submitPhoto(newPhoto){
-        await apiClient.post("Photo/InsertPhoto", newPhoto)
+        await apiClient.post("/Photo/InsertPhoto", newPhoto)
     },
     async deletePhoto(id){
-        await apiClient.delete("Photo/DeletePhoto/" + id)
+        await apiClient.delete("/Photo/DeletePhoto/" + id)
     },
     async updatePhoto(id, updatedPhoto){
-        await apiClient.patch("Photo/UpdatePhoto/" + id, updatedPhoto)
-    }
-}
+        await apiClient.patch("/Photo/UpdatePhoto/" + id, updatedPhoto)
+    } */
+// }
 
 export default PhotoServices;

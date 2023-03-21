@@ -7,6 +7,7 @@ using API_Rincones.IService;
 using Microsoft.AspNetCore.Mvc.Filters;
 using API.Enums;
 using System.Web.Http.Cors;
+using System.Text;
 
 namespace API_Rincones.Controllers
 {
@@ -22,28 +23,33 @@ namespace API_Rincones.Controllers
             _photoServices = photoServices;
         }
 
-
         [HttpPost(Name = "InsertPhoto")]
         public int InsertPhoto([FromForm] PhotoUploadModel photoUploadModel)
+        {
+            var photoItem = new PhotoItem
             {
-                var photoItem = new PhotoItem();
-                photoItem.Id = 0;
-                photoItem.Name = photoUploadModel.File.FileName;
-                photoItem.Title = photoUploadModel.Title;
-                photoItem.Description = photoUploadModel.Description;
-                photoItem.InsertDate = DateTime.Now;
-                photoItem.UpdateDate = DateTime.Now;
-                photoItem.FileExtension = photoUploadModel.FileExtension;
-                photoItem.IsActive = photoUploadModel.IsActive;
+                Id = 0,
+                Name = photoUploadModel.File.FileName,
+                Title = photoUploadModel.Title,
+                Description = photoUploadModel.Description,
+                InsertDate = DateTime.Now,
+                UpdateDate = DateTime.Now,
+                FileExtension = photoUploadModel.FileExtension,
+                IsActive = photoUploadModel.IsActive
+            };
 
-                using (var stream = new MemoryStream())
-                {
-                    photoUploadModel.File.CopyTo(stream);
-                    photoItem.Content = stream.ToArray();
-                }
-
-                return _photoServices.InsertPhoto(photoItem);
+            // Convert the image content to a byte array
+            using (var stream = new MemoryStream())
+            {
+                photoUploadModel.File.CopyTo(stream);
+                byte[] bytes = stream.ToArray();
+                photoItem.Content = Convert.ToBase64String(bytes);
             }
+
+
+            return _photoServices.InsertPhoto(photoItem);
+        }
+
 
         [HttpGet(Name = "GetAllPhotos")]
             public List<PhotoItem> GetAllPhotos()
@@ -72,24 +78,25 @@ namespace API_Rincones.Controllers
             photoItem.Description = photoUploadModel.Description;
             photoItem.IsActive = photoUploadModel.IsActive;
             photoItem.UpdateDate = DateTime.Now;
-
             if (photoUploadModel.File != null)
             {
                 photoItem.Name = photoUploadModel.File.FileName;
                 photoItem.FileExtension = (FileExtensionEnum)Enum.Parse(typeof(FileExtensionEnum), Path.GetExtension(photoUploadModel.File.FileName).Substring(1), true);
-
                 using (var stream = new MemoryStream())
                 {
                     photoUploadModel.File.CopyTo(stream);
-                    photoItem.Content = stream.ToArray();
+                    byte[] bytes = stream.ToArray();
+                    photoItem.Content = Convert.ToBase64String(bytes);
                 }
+
             }
 
-            _photoServices.UpdatePhoto(photoItem);
+            _photoServices.InsertPhoto(photoItem);
         }
 
+
         [HttpDelete(Name = "DeletePhoto")]
-            public void Delete([FromQuery] int id)
+        public void Delete([FromQuery] int id)
             {
                 _photoServices.DeletePhoto(id);
             }

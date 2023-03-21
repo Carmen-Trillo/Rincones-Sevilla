@@ -1,34 +1,23 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import PhotoHandler from '../handler/PhotoHandler';
-import PhotoServices from '../services/PhotoServices'
-import { Link } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
+
 
 export default function PhotoList() {
-    const [photo, setPhoto] = useState([photo]);
+    const {Photos}=useLoaderData();
+    console.log(Photos);
 
-    useEffect(() => {
-        getAllPhotos();
-    }, []);
-
-    const getAllPhotos = async () => {
-        const data = await PhotoHandler.loadPhotos();
-        setPhoto(data);
-      };
-
-  return (
+return (
     <>
     <div id="container">
         {
-        photo.map((photo) =>
-            <div key={photo.id}>
-            <h1>{photo.Title}</h1>
-            <p>{photo.Description}</p>
-            <img src={photo.Content} alt={photo.Title} />
-             </div>
-            )
+        Photos.map((item) => 
+            <div key={item.id}>
+                <h1>{item.title}</h1>
+                <p>{item.description}</p>
+                <img src={`data:image/jpg;base64,${item.content}`} alt={item.title} />
+            </div>
+                )
         }
     </div>
     </>
-  );
+    )        
 };

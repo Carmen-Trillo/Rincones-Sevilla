@@ -3,6 +3,7 @@ using API_Rincones.IService;
 using Entities.Entities;
 using Entities.SearchFilter;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.Web.Http.Cors;
 
 namespace API_Rincones.Controllers
@@ -22,24 +23,32 @@ namespace API_Rincones.Controllers
         [HttpPost(Name = "InsertPhoto")]
         public async Task<int> InsertPhoto([FromForm] PhotoUploadModel photoUploadModel)
         {
+
             var photoItem = new PhotoItem
             {
                 Id = 0,
-                Name = photoUploadModel.File.FileName,
                 Title = photoUploadModel.Title,
                 Description = photoUploadModel.Description,
                 InsertDate = DateTime.Now,
                 UpdateDate = DateTime.Now,
                 FileExtension = photoUploadModel.FileExtension,
-                IsActive = photoUploadModel.IsActive
+                IsActive = true,
             };
 
             // Convert the image content to a byte array
-            using (var stream = new MemoryStream())
+            if (photoUploadModel.File != null) // Si la información proviene del back
             {
-                await photoUploadModel.File.CopyToAsync(stream);
-                byte[] bytes = stream.ToArray();
-                photoItem.Content = Convert.ToBase64String(bytes);
+                using (var stream = new MemoryStream())
+                {
+                    await photoUploadModel.File.CopyToAsync(stream);
+                    byte[] bytes = stream.ToArray();
+                    photoItem.Content = Convert.ToBase64String(bytes);
+                }
+            }
+            else // Si la información proviene del front
+            {
+                string contentString = string.IsNullOrEmpty(photoUploadModel.Content) ? string.Empty : photoUploadModel.Content;
+                photoItem.Content = contentString;
             }
 
             return await _photoServices.InsertPhoto(photoItem);
@@ -70,11 +79,10 @@ namespace API_Rincones.Controllers
 
             photoItem.Title = photoUploadModel.Title;
             photoItem.Description = photoUploadModel.Description;
-            photoItem.IsActive = photoUploadModel.IsActive;
+            photoItem.IsActive = true;
             photoItem.UpdateDate = DateTime.Now;
             if (photoUploadModel.File != null)
             {
-                photoItem.Name = photoUploadModel.File.FileName;
                 photoItem.FileExtension = (FileExtensionEnum)Enum.Parse(typeof(FileExtensionEnum), Path.GetExtension(photoUploadModel.File.FileName).Substring(1), true);
                 using (var stream = new MemoryStream())
                 {
@@ -85,7 +93,7 @@ namespace API_Rincones.Controllers
 
             }
 
-            await _photoServices.InsertPhoto(photoItem);
+            await _photoServices.UpdatePhoto(photoItem);
         }
 
         [HttpDelete(Name = "DeletePhoto")]

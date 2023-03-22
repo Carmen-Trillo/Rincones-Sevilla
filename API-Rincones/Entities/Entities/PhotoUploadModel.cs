@@ -9,7 +9,8 @@ namespace Entities.Entities
         public IFormFile File { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public bool IsActive { get; set; }
+        public string Content { get; private set; }
+        public bool IsActive { get; private set; }
         public FileExtensionEnum FileExtension { get; set; }
     }
 }

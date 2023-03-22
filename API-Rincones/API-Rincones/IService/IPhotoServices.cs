@@ -5,8 +5,10 @@ namespace API_Rincones.IService
 {
     public interface IPhotoServices
     {
-        Task<int> InsertPhoto(PhotoItem photoItem);
-        Task UpdatePhoto(PhotoItem photoItem);
+        Task<int> InsertPhotoAPI(PhotoItem photoItem);
+        Task<int> InsertPhotoFront(PhotoFromFront photoFromFront);
+        Task UpdatePhotoFront(PhotoItem photoItem);
+        Task UpdatePhotoAPI(PhotoItem photoItem);
         Task DeletePhoto(int id);
         Task<List<PhotoItem>> GetAllPhotos();
         Task<PhotoItem> GetPhotoById(int id);

@@ -11,6 +11,7 @@ namespace Data
 
         public ServiceContext(DbContextOptions<ServiceContext> options) : base(options) { }
         public DbSet<PhotoItem> Photos { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<PhotoItem>().ToTable("Photos");

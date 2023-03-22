@@ -59,14 +59,27 @@ namespace Logic.Logic
             return await resultList.ToListAsync();
         }
 
-        public async Task<int> InsertPhoto(PhotoItem photoItem)
+        public async Task<int> InsertPhotoAPI(PhotoItem photoItem)
         {
             _serviceContext.Photos.Add(photoItem);
             await _serviceContext.SaveChangesAsync();
             return photoItem.Id;
         }
 
-        public async Task UpdatePhoto(PhotoItem photoItem)
+        public async Task<int> InsertPhotoFront(PhotoItem photoItem)
+        {
+            _serviceContext.Photos.Add(photoItem);
+            await _serviceContext.SaveChangesAsync();
+            return photoItem.Id;
+        }
+
+        public async Task UpdatePhotoAPI(PhotoItem photoItem)
+        {
+            _serviceContext.Photos.Update(photoItem);
+            await _serviceContext.SaveChangesAsync();
+        }
+
+        public async Task UpdatePhotoFront(PhotoItem photoItem)
         {
             _serviceContext.Photos.Update(photoItem);
             await _serviceContext.SaveChangesAsync();

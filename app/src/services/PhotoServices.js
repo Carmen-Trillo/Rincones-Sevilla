@@ -22,7 +22,7 @@ const PhotoServices = {
     },
     async submitPhoto(newPhoto){
         try {
-           const response = await apiClient.post("/InsertPhoto", newPhoto);
+           const response = await apiClient.post("/InsertPhotoFront", newPhoto);
            return response.data;
         } catch (error) {
            console.error(error);
@@ -32,7 +32,7 @@ const PhotoServices = {
         await apiClient.delete(`/Delete?id=${id}`)
     },
     async updatePhoto(id, updatedPhoto){
-        await apiClient.patch(`/Patch?id=${id}`, updatedPhoto)
+        await apiClient.patch(`/UpdatePhotoFront?id=${id}`, updatedPhoto)
     }
 }
 

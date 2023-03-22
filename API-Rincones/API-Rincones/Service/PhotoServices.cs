@@ -15,10 +15,15 @@ namespace API_Rincones.Services
             _photoLogic = photoLogic;
         }
 
-        public async Task<int> InsertPhoto(PhotoItem photoItem)
+        public async Task<int> InsertPhotoAPI(PhotoItem photoItem)
         {
-            await _photoLogic.InsertPhoto(photoItem);
-            return photoItem.Id;
+            return await _photoLogic.InsertPhotoAPI(photoItem);
+        }
+
+        public async Task<int> InsertPhotoFront(PhotoFromFront photoFromFront)
+        {
+            //var photoFromFrontItem = photoFromFront.ToPhotoItem();
+            return await _photoLogic.InsertPhotoFront(photoFromFront.ToPhotoItem());
         }
 
         public async Task<List<PhotoItem>> GetAllPhotos()
@@ -36,9 +41,14 @@ namespace API_Rincones.Services
             return await _photoLogic.GetPhotosByFilter(photoFilter);
         }
 
-        public async Task UpdatePhoto(PhotoItem photoItem)
+        public async Task UpdatePhotoFront(PhotoItem photoItem)
         {
-            await _photoLogic.UpdatePhoto(photoItem);
+            await _photoLogic.UpdatePhotoFront(photoItem);
+        }
+
+        public async Task UpdatePhotoAPI(PhotoItem photoItem)
+        {
+            await _photoLogic.UpdatePhotoAPI(photoItem);
         }
 
         public async Task DeletePhoto(int id)

@@ -4,6 +4,7 @@ using Entities.Entities;
 using Entities.SearchFilter;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Text;
 using System.Web.Http.Cors;
 
 namespace API_Rincones.Controllers
@@ -20,7 +21,8 @@ namespace API_Rincones.Controllers
             _photoServices = photoServices;
         }
 
-        [HttpPost(Name = "InsertPhoto")]
+        [HttpPost(Name = "InsertPhotoAPI")]
+        [ActionName("InsertPhotoAPI")]
         public async Task<int> InsertPhoto([FromForm] PhotoUploadModel photoUploadModel)
         {
 
@@ -36,23 +38,41 @@ namespace API_Rincones.Controllers
             };
 
             // Convert the image content to a byte array
-            if (photoUploadModel.File != null) // Si la información proviene del back
-            {
+            
                 using (var stream = new MemoryStream())
                 {
                     await photoUploadModel.File.CopyToAsync(stream);
                     byte[] bytes = stream.ToArray();
                     photoItem.Content = Convert.ToBase64String(bytes);
                 }
-            }
-            else // Si la información proviene del front
-            {
-                string contentString = string.IsNullOrEmpty(photoUploadModel.Content) ? string.Empty : photoUploadModel.Content;
-                photoItem.Content = contentString;
-            }
+            
 
-            return await _photoServices.InsertPhoto(photoItem);
+            return await _photoServices.InsertPhotoAPI(photoItem);
         }
+
+        /*[HttpPost(Name = "InsertPhotoFront")]
+        [ActionName("InsertPhotoFront")]
+        public async Task<int> InsertPhoto([FromForm] PhotoItem photoItem)
+
+        {
+            return await _photoServices.InsertPhotoFront(photoItem);
+        }*/
+
+        [HttpPost(Name = "InsertPhotoFront")]
+        [ActionName("InsertPhotoFront")]
+        public async Task<int> InsertPhoto([FromBody] PhotoFromFront photoFromFront)
+        {
+            // Decodificamos la cadena base64 del campo "Content"
+            
+            //byte[] contentBytes = Convert.FromBase64String(photoFromFront.Content);
+            //Debugger.Break();
+            //string content = Encoding.UTF8.GetString(contentBytes);
+
+
+            return await _photoServices.InsertPhotoFront(photoFromFront);
+
+        }
+
 
         [HttpGet(Name = "GetAllPhotos")]
         public async Task<List<PhotoItem>> GetAllPhotos()
@@ -72,7 +92,8 @@ namespace API_Rincones.Controllers
             return await _photoServices.GetPhotosByFilter(photoFilter);
         }
 
-        [HttpPatch(Name = "UpdatePhoto")]
+        [HttpPatch(Name = "UpdatePhotoAPI")]
+        [ActionName("UpdatePhotoAPI")]
         public async Task Patch(int id, [FromForm] PhotoUploadModel photoUploadModel)
         {
             var photoItem = await _photoServices.GetPhotoById(id);
@@ -93,7 +114,16 @@ namespace API_Rincones.Controllers
 
             }
 
-            await _photoServices.UpdatePhoto(photoItem);
+            await _photoServices.UpdatePhotoAPI(photoItem);
+        }
+
+        [HttpPatch(Name = "UpdatePhotoFront")]
+        [ActionName("UpdatePhotoFront")]
+ 
+
+        public async Task Patch(int id, [FromForm] PhotoItem photoItem)
+        {
+            await _photoServices.UpdatePhotoFront(photoItem);
         }
 
         [HttpDelete(Name = "DeletePhoto")]

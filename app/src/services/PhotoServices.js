@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: 'https://localhost:7125/Photo',
+    baseURL: 'http://localhost:3000/',
     withCredentials: false,
     headers: {
       Accept: 'application/json',
@@ -9,31 +9,26 @@ const apiClient = axios.create({
     }
 })
 
-const PhotoServices = {
+const PhotoService = {
     async getPhotos() {
-        let response = await apiClient.get("/GetAllPhotos");
+        let response = await apiClient.get("/photos");
         let allPhotos = response.data;
         return allPhotos;
     },
     async getPhoto(id) {
-        let response = await apiClient.get(`/GetPhotosById?id=${id}`);
+        let response = await apiClient.get("/photos/" + id);
         let photo = response.data;
         return photo;
     },
     async submitPhoto(newPhoto){
-        try {
-           const response = await apiClient.post("/InsertPhotoFront", newPhoto);
-           return response.data;
-        } catch (error) {
-           console.error(error);
-        }
-     },
+        await apiClient.post("/photos", newPhoto)
+    },
     async deletePhoto(id){
-        await apiClient.delete(`/Delete?id=${id}`)
+        await apiClient.delete("/photos/" + id)
     },
     async updatePhoto(id, updatedPhoto){
-        await apiClient.patch(`/UpdatePhotoFront?id=${id}`, updatedPhoto)
+        await apiClient.patch("/photos/" + id, updatedPhoto)
     }
 }
 
-export default PhotoServices;
+export default PhotoService

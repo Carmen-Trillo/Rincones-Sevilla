@@ -2,34 +2,14 @@ import PhotoServices from "../services/PhotoServices";
 
 const PhotoHandler = {
     addPhoto(newPhoto) {
-        if (!newPhoto) {
-            console.log("El objeto newPhoto es nulo");
-            console.log(newPhoto)
-            return;
-        }
-        let isActive = "";
-        let active = newPhoto.show;
-        let fileExtension = "";
-        // console.log(active)
-        if (active === "sí") {
-            isActive = 1;
-        } else if (active === "no"){
-            isActive = 0;
-        }
-        if (newPhoto.format === "jpg") {
-            fileExtension = 1;
-        } else if (newPhoto.format === "png") {
-            fileExtension = 2;
-        }
     
         let Photo = { 
             "Title": newPhoto.title,
             "Description": newPhoto.description,
-            "Content": newPhoto.picture,
+            "Img": newPhoto.picture,
             "InsertDate": new Date(),
             "UpdateDate": new Date(),
-            "IsActive": isActive,
-            "FileExtension": fileExtension,
+            "Public": newPhoto.show,
         }
         console.log(Photo)
         return PhotoServices.submitPhoto(Photo);

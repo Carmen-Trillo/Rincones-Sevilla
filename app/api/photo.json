@@ -1,0 +1,13 @@
+{
+    "photos": [
+    {
+        "Title": "Patio de las Muñecas" ,
+        "Description": "Cuando el Alcázar se vacía y te lo da todo",
+        "Img": "../src/assets/img/patioMunecas.jpg",
+        "InsertDate": "2023-03-22T21:39:36.619Z",
+        "UpdateDate": "2023-03-22T21:39:36.619Z",
+        "Public": "Sí",
+        "id": 1
+    }
+    ]
+}

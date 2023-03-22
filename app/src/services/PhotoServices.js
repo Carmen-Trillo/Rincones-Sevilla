@@ -1,50 +1,9 @@
-/* var baseURL = 'https://localhost:7125/Photo/'
-
-const PhotoServices = {
-GetAllPhotos: async function () {
-        return await fetch(baseURL + "GetAllPhotos")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    return result;
-                },
-                (error) => {
-                    return error;
-                }
-            );} */
-        // return await fetch(baseURL + "GetAll", {
-        //     method: "GET",
-        //     mode: "cors",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        // });
-
-
-
-    /* async getPhoto(id) {
-        let response = await baseURL.get("/photos/" + id);
-        let photo = response.data;
-        return photo;
-    },
-    async submitPhoto(newPhoto){
-        await baseURL.post("/photos", newPhoto)
-    },
-    async deletePhoto(id){
-        await baseURL.delete("/photos/" + id)
-    },
-    async updatePhoto(id, updatedPhoto){
-        await baseURL.patch("/photos/" + id, updatedPhoto)
-    }*/
-
-    
 import axios from "axios";
 
 const apiClient = axios.create({
     baseURL: 'https://localhost:7125/Photo',
     withCredentials: false,
     headers: {
-    //  'Access-Control-Allow-Origin': '*',
       Accept: 'application/json',
       'Content-Type': 'application/json'
     }
@@ -56,23 +15,25 @@ const PhotoServices = {
         let allPhotos = response.data;
         return allPhotos;
     },
-}
-
-
-   /*  async getPhoto(id) {
-        let response = await apiClient.get("/Photo/GetPhotosById/" + id);
+    async getPhoto(id) {
+        let response = await apiClient.get(`/GetPhotosById?id=${id}`);
         let photo = response.data;
         return photo;
     },
     async submitPhoto(newPhoto){
-        await apiClient.post("/Photo/InsertPhoto", newPhoto)
-    },
+        try {
+           const response = await apiClient.post("/InsertPhoto", newPhoto);
+           return response.data;
+        } catch (error) {
+           console.error(error);
+        }
+     },
     async deletePhoto(id){
-        await apiClient.delete("/Photo/DeletePhoto/" + id)
+        await apiClient.delete(`/Delete?id=${id}`)
     },
     async updatePhoto(id, updatedPhoto){
-        await apiClient.patch("/Photo/UpdatePhoto/" + id, updatedPhoto)
-    } */
-// }
+        await apiClient.patch(`/Patch?id=${id}`, updatedPhoto)
+    }
+}
 
 export default PhotoServices;

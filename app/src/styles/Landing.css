@@ -43,6 +43,7 @@
   font-family: "Rough";
   font-size: 38px;
   text-align: center;
+  text-transform: none;
 }
 #card p {
   font-family: "Jmh";

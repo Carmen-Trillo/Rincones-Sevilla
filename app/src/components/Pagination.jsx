@@ -4,7 +4,7 @@ import Dashboard from './Dashboard';
 
 const MyComponent = () => {
   const [activePage, setActivePage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 5;
   const myArray = [Photos];
 
   const handlePageChange = (pageNumber) => {

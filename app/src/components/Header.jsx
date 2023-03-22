@@ -13,10 +13,10 @@ export default function Header() {
       <div>
       <nav className="navbar">
         <ul>
-          <li><Link style={{height: '3vh', fontFamily: 'Jmh', textDecoration: 'none', color: 'white'}}to="/">Inicio</Link></li>
-          <li><Link style={{height: '3vh', fontFamily: 'Jmh', textDecoration: 'none', color: 'white'}}to="/">Galería</Link></li>
-          <li><Link style={{height: '3vh', fontFamily: 'Jmh', textDecoration: 'none', color: 'white'}}to="/">Contacto</Link></li>
-          <li><Button style={{height: '4vh', fontFamily: 'Jmh', width: '6vw', display: 'flex', flexDirection: 'row'}} variant="outline-light"><img src={Add} alt="añadir foto"/><p>  Fotos</p></Button></li>
+          <li><Link to={`/`}style={{height: '3vh', fontFamily: 'Jmh', textDecoration: 'none', color: 'white'}}>Inicio</Link></li>
+          <li><Link to={`/Gallery`} style={{height: '3vh', fontFamily: 'Jmh', textDecoration: 'none', color: 'white'}}>Galería</Link></li>
+          <li><Link to={`/Contact`} style={{height: '3vh', fontFamily: 'Jmh', textDecoration: 'none', color: 'white'}}>Contacto</Link></li>
+          <li><Link style={{textDecoration:'none'}} variant="outline-light" to={`/NewPhoto`}><Button style={{height: '4vh', fontFamily: 'Jmh', width: '6vw', display: 'flex', flexDirection: 'row'}} variant="outline-light"><img src={Add} alt="añadir foto"/><p>  Fotos</p></Button></Link></li>
         </ul>
       </nav>
       </div>

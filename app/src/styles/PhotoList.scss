@@ -6,6 +6,8 @@
     background-size: cover;
     height: 75vh;
     padding-top: 5vh;
+    width: 100vw;
+    display: flex;
 }
 
 #dashboard {
@@ -19,3 +21,17 @@
     flex-direction: row;
     grid-template-columns: repeat(4 1fr);
 }
+
+#pagination {
+    margin: auto;
+}
+
+.page-item {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+
+.page-link {
+    color: white;
+  }

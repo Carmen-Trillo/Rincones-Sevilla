@@ -6,7 +6,6 @@ import NewPhoto from "../pages/NewPhoto";
 import EditPhoto from "../pages/EditPhoto";
 import Contact from "../pages/Contact";
 import PhotoHandler from '../handler/PhotoHandler';
-import PhotoServices from '../services/PhotoServices';
 
 
 export const router = createBrowserRouter([
@@ -30,7 +29,7 @@ export const router = createBrowserRouter([
                     {
                         path: '/editPhoto/:id',
                         element: <EditPhoto />,
-                        /* loader: fetchPhoto */
+                        loader: fetchPhoto,
                     },
                     {
                         path: '/contact',
@@ -42,11 +41,11 @@ export const router = createBrowserRouter([
 );
 
 async function fetchPhotos() {
-    const Photos = await PhotoServices.getPhotos();
+    const Photos = await PhotoHandler.loadPhotos();
     return { Photos };
 }
 
-/* async function fetchPhoto({ params }) {
+async function fetchPhoto({ params }) {
     const Photo = await PhotoHandler.loadPhoto(params.id);
     return { Photo };
-} */
+}

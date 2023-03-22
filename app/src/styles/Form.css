@@ -1,0 +1,143 @@
+#container {
+  background-image: url(../assets/img/filella.jpg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: container;
+  background-size: cover;
+  height: 75vh;
+  padding-top: 5vh;
+}
+
+form {
+  max-width: 35vw;
+  min-width: 20rem;
+  padding: 4vh 2vw;
+  margin-left: 6vw;
+  font-family: "Jmh";
+  border-radius: 5px;
+}
+
+input, select, option {
+  display: block;
+  margin: 0.5rem 0;
+  margin: 1vh;
+  width: 31vw;
+  min-height: 4vh;
+  background-color: white;
+  color: #000000;
+  border-radius: 5px;
+  padding: 0.5vh 0.8vw;
+  font-family: "Jmh";
+}
+
+label {
+  margin-top: 2vh;
+  color: white;
+  font-family: "Mom";
+  margin-left: 1.5vw;
+}
+
+select {
+  color: rgba(108, 99, 99, 0.807);
+}
+
+.inline {
+  width: unset;
+  margin: 0 0.5em 0 0;
+  vertical-align: middle;
+}
+
+input[type=submit] {
+  display: block;
+  width: 10vw;
+  margin: 1em auto;
+  height: 2em;
+  font-size: 1.1rem;
+  background-color: white;
+  border-color: whitesmoke;
+  border-radius: 5px;
+  color: black;
+  font-family: "Mom";
+}
+
+input[type=reset] {
+  display: block;
+  width: 10vw;
+  margin: 1em auto;
+  height: 2em;
+  font-size: 1.1rem;
+  background-color: white;
+  border-color: whitesmoke;
+  border-radius: 5px;
+  color: black;
+  font-family: "Mom";
+}
+
+input[type=button] {
+  display: block;
+  width: 10vw;
+  margin: 1em auto;
+  height: 2em;
+  font-size: 1.1rem;
+  background-color: white;
+  border-color: whitesmoke;
+  border-radius: 5px;
+  color: black;
+  font-family: "Mom";
+}
+
+input[type=file] {
+  padding: 1px 2px;
+  color: white;
+  background-color: #000000;
+  border-radius: 5px;
+  font-family: "Mom";
+  width: 31vw;
+  margin-top: 2vh;
+}
+
+#buttons {
+  display: flex;
+  align-content: center;
+}
+
+#term {
+  display: flex;
+  flex-direction: row;
+}
+
+#term label {
+  margin-top: 0.3rem;
+}
+
+input[type=checkbox] {
+  width: 1rem;
+}
+
+h2, p {
+  font-family: "Jmh";
+  font-size: 15px;
+  text-align: center;
+}
+
+h2 {
+  text-transform: uppercase;
+}
+
+p {
+  text-transform: capitalize;
+}
+
+@media (min-width: 320px) and (max-width: 760px) {
+  #buttons {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+  input[type=submit] {
+    margin-bottom: 0%;
+  }
+  input[type=checkbox] {
+    width: 1rem;
+  }
+}/*# sourceMappingURL=Form.css.map */

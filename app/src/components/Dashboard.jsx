@@ -1,21 +1,25 @@
 import { useLoaderData } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
+import React from 'react';
 import Ver from '../assets/img/ver.png';
 import Editar from '../assets/img/editar.png';
 import Eliminar from '../assets/img/eliminar.png';
+import { Link } from "react-router-dom"
 
 
 export default function Dashboard() {
     const { Photos } = useLoaderData();
     console.log(Photos);
 
-    const [form, setForm] = useState(false);
+    const deleteShort = async (id) => {
+        setPhotoss(photos.filter((p) => p.id !== id));
+        await PhotoHandler.deletePhoto(id);
+      };
 
-    const handleClose = () => setForm(false);
-    const handleShow = () => setForm(true);
+    if (!Photos) {
+        return <div>Loading...</div>;
+      }
 
     return (
         <div id="dashboard" style={{ display: 'flex', flexWrap: 'wrap', textAlign: 'center' }}>
@@ -47,9 +51,11 @@ export default function Dashboard() {
                         </Modal.Body>
 
                         <Modal.Footer style={{marginBottom:'0.8vh'}}>
-                            <Button style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} onClick={handleShow} variant="outline-light"><img src={Ver} style={{width:'1.2vw'}} alt="ver foto"/></Button>
-                            <Button style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} onClick={handleShow} variant="outline-light"><img src={Editar} style={{width:'1.2vw'}} alt="ver foto"/></Button>
-                            <Button style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} variant="outline-light"><img src={Eliminar} style={{width:'1.2vw'}} alt="ver foto"/></Button>
+                            <Button style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} variant="outline-light"><img src={Ver} style={{width:'1.2vw'}} alt="ver foto"/></Button>
+                            <Link to={`/EditPhoto/${item.id}`}>
+                                <Button style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} onClick={EditPhoto} variant="outline-light"><img src={Editar} style={{width:'1.2vw'}} alt="editar foto"/></Button>
+                            </Link>
+                            <Button onClick={() => deleteShort(item.id)} style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} variant="outline-light"><img src={Eliminar} style={{width:'1.2vw'}} alt="eliminar foto"/></Button>
                         </Modal.Footer>
                     </Modal.Dialog>
                 </div>

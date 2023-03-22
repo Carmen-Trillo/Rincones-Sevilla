@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import PhotoHandler from '../handler/PhotoHandler';
@@ -28,6 +28,8 @@ export default function EditPhoto() {
     const [description, setDescription] = useState(Photos.description);
     const [isActive, SetIsActive] = useState(Photos.isActive)
     const [fileExtension, SetFileExtension] = useState(Photos.fileExtension)
+
+    const formRef = useRef(null);
 
     const handleImgChange = (event) => {
         const file = event.target.files[0];
@@ -65,6 +67,7 @@ export default function EditPhoto() {
     const [showAlert, setShowAlert] = useState(false);
 
     const handleAddClick = () => {
+        formRef.current.reset();
         setShowAlert(true);
     }
 

@@ -13,7 +13,7 @@ export default function Dashboard() {
     console.log(Photos);
 
     const deleteShort = async (id) => {
-        setPhotoss(photos.filter((p) => p.id !== id));
+        setPhotos(photos.filter((p) => p.id !== id));
         await PhotoHandler.deletePhoto(id);
       };
 

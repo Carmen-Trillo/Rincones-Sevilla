@@ -3,16 +3,16 @@ import PhotoServices from "../services/PhotoServices";
 const PhotoHandler = {
     addPhoto(newPhoto) {
     
-        let Photo = { 
-            "Title": newPhoto.title,
-            "Description": newPhoto.description,
-            "Img": newPhoto.picture,
-            "InsertDate": new Date(),
-            "UpdateDate": new Date(),
-            "Public": newPhoto.show,
+        let photo = { 
+            "title": newPhoto.title,
+            "description": newPhoto.description,
+            "img": newPhoto.picture,
+            "insertDate": new Date(),
+            "updateDate": new Date(),
+            "public": newPhoto.show,
         }
-        console.log(Photo)
-        return PhotoServices.submitPhoto(Photo);
+        console.log(photo)
+        return PhotoServices.submitPhoto(photo);
     },
     loadPhotos(){
         return PhotoServices.getPhotos();
@@ -28,28 +28,13 @@ const PhotoHandler = {
             console.log(updatedPhoto)
             return;
         }
-
-        let isActive = 0;
-        let fileExtension = "";
-        if (updatedPhoto.show === "Sí") {
-            isActive = 1;
-        } else if (updatedPhoto.show === "No"){
-            isActive = 0;
-        }
-        if (updatedPhoto.extension === "jpg") {
-            fileExtension = "1";
-        } else if (updatedPhoto.extension === "png") {
-            fileExtension = "2";
-        }
-
+        
         let updatedPhotoStructure = {
-            "Name": "",
-            "Title": updatedPhoto.title,
-            "Description": updatedPhoto.description,
-            "Content": "",
+            "title": updatedPhoto.title,
+            "description": updatedPhoto.description,
+            "img": updatedPhoto.picture,
             "UpdateDate": new Date(),
-            "IsActive": isActive,
-            "FileExtension": fileExtension,
+            "public": updatedPhoto.show,
             "id": ""
         }
         return PhotoServices.updatePhoto(id, updatedPhotoStructure);

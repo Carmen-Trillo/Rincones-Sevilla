@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router-dom';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React from 'react';
@@ -8,31 +8,31 @@ import Editar from '../assets/img/editar.png';
 import Eliminar from '../assets/img/eliminar.png';
 import { Link } from "react-router-dom";
 import EditPhoto from './EditPhoto';
-import Pagination from "react-js-pagination";
+import PhotoPagination from "../components/PhotoPagination";
 import PhotoHandler from '../handler/PhotoHandler';
 import '../../src/index.css';
 import '../styles/PhotoList.css';
 
 export default function Dashboard() {
-    const { Photos } = useLoaderData();
-    const [currentPage, setCurrentPage] = useState(1); // Iniciamos la página en 1
-    const photosPerPage = 5;
 
-    const indexOfLastPhoto = currentPage * photosPerPage;
-    const indexOfFirstPhoto = indexOfLastPhoto - photosPerPage;
-    const currentPhotos = Photos.slice(indexOfFirstPhoto, indexOfLastPhoto);
+    const [photos, setPhotos] = useState([]);
+    useEffect(() => {
+        getData();
+      }, []);
 
-    const pageCount = Math.ceil(Photos.length / photosPerPage);
+    const getData = async () => {
+        const data = await PhotoHandler.loadPhotos();
+        setPhotos(data);
+      };
 
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
+      const deleteShort = async (id) => {
+        setProducts(products.filter((p) => p.id !== id));
+        await ProductHandler.deleteProduct(id);
+      };
 
-    const deleteShort = async (id) => {
-        await PhotoHandler.deletePhoto(id)
-    };
+    console.log(photos)
 
-    if (!Photos) {
+    if (photos.length === 0) {
         return <div>Loading...</div>;
     }
 
@@ -40,8 +40,8 @@ export default function Dashboard() {
         <div id="container">
             <div style={{ display: 'flex', flexWrap: 'wrap', textAlign: 'center' }}>
             
-            {currentPhotos.map((item) => (
-                // {item.isActive === 1 &&(
+            {photos.map((item) => (
+                // {item.Public === "Sí" &&(
                 <div id='card'
                     key={item.id}
                     style={{
@@ -62,7 +62,7 @@ export default function Dashboard() {
 
                         <Modal.Body style={{ fontSize: '12px' }}>
                             <img
-                                src={`data:image/jpg;base64,${item.content}`}
+                                src={item.img}
                                 alt={item.title}
                                 style={{ width: '12vw' }}
                             />
@@ -76,7 +76,7 @@ export default function Dashboard() {
                                 <Button style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} onClick={EditPhoto} variant="outline-light"><img src={Editar} style={{width:'1.2vw'}} alt="editar foto"/></Button>
                             </Link>
 
-                            <Button onClick={deleteShort(item.id)} style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} variant="outline-light"><img src={Eliminar} style={{width:'1.2vw'}} alt="eliminar foto"/></Button>
+                            <Button onClick={() => deleteShort(item.id)} style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} variant="outline-light"><img src={Eliminar} style={{width:'1.2vw'}} alt="eliminar foto"/></Button>
                         </Modal.Footer>
                     </Modal.Dialog>
 
@@ -85,25 +85,7 @@ export default function Dashboard() {
                 ))}
             </div>
             <div id='pagination' >
-            <Pagination
-                style={{
-                color: 'white',
-                fontFamily: 'Mom',
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                gap: '10px',
-                }}
-            activePage={currentPage}
-            itemsCountPerPage={photosPerPage}
-            totalItemsCount={Photos.length}
-            pageRangeDisplayed={5}
-            onChange={handlePageChange}
-            itemClass="page-item"
-            linkClass="page-link"
-            >
-            <span></span>
-            </Pagination>
+            <PhotoPagination />
             </div>
         </div>
     

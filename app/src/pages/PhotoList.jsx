@@ -1,4 +1,3 @@
-import { useLoaderData } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -7,19 +6,30 @@ import Ver from '../assets/img/ver.png';
 import Editar from '../assets/img/editar.png';
 import Eliminar from '../assets/img/eliminar.png';
 import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import EditPhoto from './EditPhoto';
 import PhotoHandler from '../handler/PhotoHandler';
+import ReactPaginate from "react-paginate";
 import '../../src/index.css';
 import '../styles/PhotoList.css';
 
 export default function Dashboard() {
-
+    const {id} = useParams();
     const [photos, setPhotos] = useState([]);
-    const [activePage, setActivePage] = useState(1);
-    const photosPerPage = 5;
+    const [currentPage, setCurrentPage] = useState(1);
+
+
     useEffect(() => {
         getData();
       }, []);
+
+      useEffect(() => {
+        async function fetchPhoto() {
+          const photoData = await PhotoHandler.loadPhoto(id);
+          setPhotos(photoData);
+        }
+        fetchPhoto();
+      }, [id]);
 
     const getData = async () => {
         const data = await PhotoHandler.loadPhotos();
@@ -31,128 +41,121 @@ export default function Dashboard() {
         await PhotoHandler.deletePhoto(id);
       };
 
-    console.log(photos)
+    const [fullscreen, setFullscreen] = useState(true);
+    const [show, setShow] = useState(false);
 
-    /* const startPhotoIndex = (activePage - 1) * photosPerPage;
-    const visiblePhotos = photos.slice(startPhotoIndex, startPhotoIndex + photosPerPage);
- */
+    function handleShow(breakpoint) {
+        setFullscreen(breakpoint);
+        setShow(true);
+      }
+
+    const [selectedPhotoTitle, setSelectedPhotoTitle] = useState("");
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    const isMobile = windowWidth <= 768; 
+    const originalArray = photos;
+
+
+    const itemsPerPage = isMobile ? 2 : 5;
+    const getPageItems = (page) => {
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        return originalArray.slice(startIndex, endIndex);
+      };
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    console.log(photos)
 
     if (photos.length === 0) {
         return <div>Loading...</div>;
     }
-    function mediaquery(){
-        let mediaqueryList = window.matchMedia("(max-width: 760px)");
-        if (mediaqueryList.matches){
+
     return (
         <div id="container">
             <div style={{ display: 'flex', flexWrap: 'wrap', textAlign: 'center' }}>
             
-            {photos.map((item) => (
-                // {item.show === "Sí" &&(
+            {getPageItems(currentPage).map((item) => (
                 <div id='card'
                     key={item.id}
-                    style={{
-                        width: '15vw',
-                        backgroundColor: 'white',
-                        margin: '1vh 2vw',
-                        borderRadius: '5px',
-                        padding: '0.5vh 0.6vw',
-                        height: '62vh',
-                    }}
+                    
                 >
-                    <Modal.Dialog>
+                    <Modal.Dialog id='cardModal'>
                         <Modal.Header>
-                            <Modal.Title style={{fontFamily:'Cream', fontSize: '24px', padding:'1vh'}}>
+                            <Modal.Title id='titleCard'>
                                 {item.title}
                             </Modal.Title>
                         </Modal.Header>
 
-                        <Modal.Body style={{ fontSize: '12px' }}>
+                        <Modal.Body id='bodyCard'>
                             <img
                                 src={item.img}
                                 alt={item.title}
-                                style={{ width: '12vw' }}
                             />
-                            <p style={{margin: '1vh', height: '10vh', fontSize:'14px'}}>{item.description}</p>
+                            <p id='description'>{item.description}</p>
                         </Modal.Body>
 
-                        <Modal.Footer style={{marginBottom:'0.8vh'}}>
-                            <Button style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} variant="outline-light"><img src={Ver} style={{width:'1.2vw'}} alt="ver foto"/></Button>
+                        <Modal.Footer id='buttonsIcons'>
+                            <Button className='buttonCard' onClick={() => {
+                            setSelectedPhotoTitle(item.title);
+                            handleShow(v);}}
+                            variant="outline-light"><img src={Ver} alt="ver foto" className='icons'/></Button>
                             
                             <Link to={`/EditPhoto/${item.id}`}>
-                                <Button style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} onClick={EditPhoto} variant="outline-light"><img src={Editar} style={{width:'1.2vw'}} alt="editar foto"/></Button>
+                                <Button className='buttonCard' id='edit' onClick={EditPhoto} variant="outline-light"><img className='icons'src={Editar} alt="editar foto"/></Button>
                             </Link>
 
-                            <Button onClick={() => deleteShort(item.id)} style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} variant="outline-light"><img src={Eliminar} style={{width:'1.2vw'}} alt="eliminar foto"/></Button>
+                            <Button className='buttonCard' onClick={() => deleteShort(item.id)} variant="outline-light"><img className='icons' src={Eliminar} alt="eliminar foto"/></Button>
                         </Modal.Footer>
                     </Modal.Dialog>
-
+                    <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+                        <Modal.Header closeButton>
+                        <Modal.Title>{selectedPhotoTitle}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <img
+                            src={item.img}
+                            alt={item.title}
+                            style={{ width: '12vw' }}
+                            />
+                        </Modal.Body>
+                    </Modal>
                 </div>
+                
                
                 ))}
-            </div>
-            <div id='pagination' >
-            </div>
-        </div>
-    
-    )}else{return(
-        <div id="container">
-            <div style={{ display: 'flex', flexWrap: 'wrap', textAlign: 'center' }}>
             
-            {photos.map((item) => (
-                // {item.show === "Sí" &&(
-                <div id='card'
-                    key={item.id}
-                    style={{
-                        width: '15vw',
-                        backgroundColor: 'white',
-                        margin: '1vh 2vw',
-                        borderRadius: '5px',
-                        padding: '0.5vh 0.6vw',
-                        height: '62vh',
-                    }}
-                >
-                    <Modal.Dialog>
-                        <Modal.Header>
-                            <Modal.Title style={{fontFamily:'Cream', fontSize: '24px', padding:'1vh'}}>
-                                {item.title}
-                            </Modal.Title>
-                        </Modal.Header>
-
-                        <Modal.Body style={{ fontSize: '12px' }}>
-                            <img
-                                src={item.img}
-                                alt={item.title}
-                                style={{ width: '12vw' }}
-                            />
-                            <p style={{margin: '1vh', height: '10vh', fontSize:'14px'}}>{item.description}</p>
-                        </Modal.Body>
-
-                        <Modal.Footer style={{marginBottom:'0.8vh'}}>
-                            <Button style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} variant="outline-light"><img src={Ver} style={{width:'1.2vw'}} alt="ver foto"/></Button>
-                            
-                            <Link to={`/EditPhoto/${item.id}`}>
-                                <Button style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} onClick={EditPhoto} variant="outline-light"><img src={Editar} style={{width:'1.2vw'}} alt="editar foto"/></Button>
-                            </Link>
-
-                            <Button onClick={() => deleteShort(item.id)} style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} variant="outline-light"><img src={Eliminar} style={{width:'1.2vw'}} alt="eliminar foto"/></Button>
-                        </Modal.Footer>
-                    </Modal.Dialog>
-
-                </div>
-               
-                ))}
             </div>
-            <div id='pagination' >
-            </div>
+                {photos.length > itemsPerPage && (
+                <ReactPaginate
+                style={{fontSize:'16px', backgroundColor: 'white', borderRadius: '5px', color:'black', fontFamily: 'Mom'}}
+                previousLabel={"<"}
+                nextLabel={">"}
+                breakLabel={"..."}
+                pageCount={Math.ceil(photos.length / itemsPerPage)}
+                onPageChange={(data) => handlePageChange(data.selected + 1)}
+                containerClassName={"pagination"}
+                activeClassName={"active"}
+                pageClassName={"page-item"}
+                pageLinkClassName={"page-link"}
+                previousClassName={"page-item"}
+                previousLinkClassName={"page-link"}
+                nextClassName={"page-item"}
+                nextLinkClassName={"page-link"}
+                breakClassName={"page-item"}
+                breakLinkClassName={"page-link"}
+                />
+                )}
         </div>
-    )}
-    }
-    return (
-        <div>
-          {mediaquery()}
-        </div>
-        );
+    )
 }
 
 

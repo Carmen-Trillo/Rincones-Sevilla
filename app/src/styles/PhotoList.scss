@@ -10,19 +10,18 @@
     display: flex;
 }
 
-#dashboard {
-    text-align: center;
-    font-family: 'Jmh';
-    font-size: 14px;
+#card{
+    max-width: 15vw;
+    background-color: white;
+    margin: -2vw;
+    border-radius: 5px;
+    padding: 0.5vh 0.6vw;
+    height: 73vh;
+    margin-bottom: 2vh;
+    margin-left: 5vw;
 }
 
-#gallery{
-    display: flex;
-    flex-direction: row;
-    grid-template-columns: repeat(4 1fr);
-}
-
-#pagination {
+.pagination {
     margin: auto;
 }
 
@@ -30,8 +29,125 @@
     display: flex;
     flex-direction: row;
     margin: auto;
+    background-color: white;
+    border-radius: 5px;
+    color:black;
+    width: 2vw;
+    height: 4vh;
+    margin-top: 0.5vh;
+    font-size: 16px;
+    font-family: 'Mom';
 }
 
 .page-link {
-    color: white;
+    color: black;
   }
+
+#titleCard{
+    font-family: 'Cream';
+    font-size: 29px;
+    padding: 1vh;
+  }
+
+#bodyCard{
+    font-size: 10px;
+    margin-bottom: 7vh;
+    img{
+        width: 12vw;
+    }}
+
+#description{
+    margin: 1vh;
+    margin-bottom: 1vh;
+    height: 12vh;
+    font-size: 18px;
+}
+
+#buttonsIcons{
+    margin-bottom: 0.8vh;
+    display: flex;
+    flex-direction: row;
+    padding: 0vh 2vw;
+  }
+
+.buttonCard{
+    width: 2.5vw;
+    height: 4.5vh;
+    padding: 0.2vw;
+    margin: 0.2vw
+}
+.icons{
+    width: 1.2vw;
+}
+#edit {
+    max-width: 2.6vw;
+}
+
+
+@media (min-width: 320px) and (max-width: 760px){
+    #container {
+        height: 25vh;
+    }
+    #card{
+        max-width: 31vw;
+        height: 50vh;
+        margin-right: -1vh;
+        margin-top: -15vh;
+        margin-bottom: 0;
+    }
+    
+    .pagination {
+        margin: auto;
+        margin-top: 12vh;
+    }
+    
+    .page-item {
+        width: 5vw;
+        height: 3vh;
+    }
+    .cardModal{
+        margin-top: -10vh;
+    }
+
+    #titleCard{
+        font-size: 22px;
+        height: 7vh;
+      }
+    
+    #bodyCard{
+        margin-bottom: 6vh;
+        img{
+            width: 24vw;
+        }}
+    
+    #description{
+        margin: 1vh;
+        margin-bottom: 1vh;
+        height: 12vh;
+    }
+
+    #buttonsIcons{
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+        align-content:space-between;
+        max-width: 8vw;
+        min-width: 2vw;
+        margin-left: -18vw;
+      }
+
+    .buttonCard{
+        min-width: 8vw;
+        min-height: 2vh;
+        margin-left: -19vw;
+        margin-right: -19vw;
+    
+    }
+    .icons{
+        width: 4vw;
+    }
+    #edit {
+        max-width: 8vw;
+    }
+}

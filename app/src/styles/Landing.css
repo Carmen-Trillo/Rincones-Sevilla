@@ -8,26 +8,27 @@
   padding-top: 5vh;
 }
 
-#card {
-  width: 50vw;
+#cardLand {
+  max-width: 90vw;
   margin-left: 5vw;
   background-color: white;
   padding: 2vh 1vw;
   border-radius: 5px;
+  margin-top: 8vh;
 }
-#card h2 {
+#cardLand #titleLand {
   font-family: "Rough";
   font-size: 38px;
   text-align: center;
   text-transform: none;
 }
-#card p {
+#cardLand #parrLand {
   font-family: "Jmh";
   font-size: 20px;
   margin-bottom: 2vh;
   text-transform: none;
 }
-#card button {
+#cardLand button {
   text-align: center;
   width: 8vw;
   height: 5vh;
@@ -38,18 +39,18 @@
 }
 
 @media (min-width: 320px) and (max-width: 760px) {
-  #card {
+  #cardLand {
     width: 70vw;
   }
-  #card h2 {
+  #cardLand #titleLand {
     font-size: 24px;
   }
-  #card p {
+  #cardLand #parrLand {
     font-family: "Jmh";
     font-size: 14px;
     margin-bottom: 2vh;
   }
-  #card button {
+  #cardLand button {
     text-align: center;
     width: 30vw;
     height: 4vh;

@@ -2,6 +2,10 @@ import PhotoServices from "../services/PhotoServices";
 
 const PhotoHandler = {
     addPhoto(newPhoto) {
+
+        const active = show === 'Sí' ? 1 : 0;
+        const extension = format === 'jpg' ? 1 : 2;
+
     
         let photo = { 
             "title": newPhoto.title,
@@ -10,6 +14,8 @@ const PhotoHandler = {
             "insertDate": new Date(),
             "updateDate": new Date(),
             "show": newPhoto.show,
+            "isActive": active,
+            "fileExtension":extension,
         }
         console.log(photo)
         return PhotoServices.submitPhoto(photo);
@@ -25,9 +31,11 @@ const PhotoHandler = {
     },
     updatePhoto(id, updatedPhoto){
         if (!updatedPhoto) {
-            console.log(updatedPhoto)
             return;
         }
+
+        const active = show === 'Sí' ? 1 : 0;
+        const extension = format === 'jpg' ? 1 : 2;
         
         let updatedPhotoStructure = {
             "title": updatedPhoto.title,
@@ -35,6 +43,8 @@ const PhotoHandler = {
             "img": updatedPhoto.imageURL,
             "updateDate": new Date(),
             "show": updatedPhoto.show,
+            "isActive": active,
+            "fileExtension": extension,
             "id": ""
         }
         return PhotoServices.updatePhoto(id, updatedPhotoStructure);

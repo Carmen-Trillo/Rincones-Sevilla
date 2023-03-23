@@ -8,17 +8,20 @@ import '../../src/index.css';
 import '../styles/Form.css';
 
 function MyForm() {
-  const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm();
+
+  const { register, handleSubmit, formState: { errors }, setValue, getValues, reset } = useForm();
+
   const [showAlert, setShowAlert] = useState(false);
   const formRef = useRef(null);
 
-  const handleImageChange = (event) => {
+ const handleImageChange = (event) => {
     const picture = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(picture);
+    console.log(picture)
     reader.onload = () => {
       setValue("picture", reader.result);
-    };
+    };console.log(picture)
   }
 
   const handleAddClick = () => {
@@ -27,7 +30,7 @@ function MyForm() {
 
   const handleAlertClose = () => {
     setShowAlert(false);
-    reset(); // Borra los datos del formulario
+    reset();
   };
 
   const onSubmit = async (data) => {

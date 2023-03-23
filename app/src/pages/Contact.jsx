@@ -15,8 +15,8 @@ export default function Contact() {
             <ContactForm style={{}} />
             </div>
             <div id='socialContact'>
-                <a title="instagram" href="" target="_blank"><img src={Instagram} alt="instagram"/></a>
-                <a title="linkedin" href="" target="_blank"><img src={Linkedin} alt="linkedin"/></a>
+                <a title="instagram" href="" target="_blank"><img className='socialContact' src={Instagram} alt="instagram"/></a>
+                <a title="linkedin" href="" target="_blank"><img className='socialContact' src={Linkedin} alt="linkedin"/></a>
             </div>
             
         </div>

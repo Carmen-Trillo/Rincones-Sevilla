@@ -21,6 +21,7 @@ h4{
 #form{
    display: flex;
    flex-direction: row;
+   margin-left: 12vw;
 }
 
 #socialContact{
@@ -29,6 +30,12 @@ h4{
    margin-top: 18vh;
    margin-Left:5vw;
 }
+
+.socialContact{
+   width: 5vw;
+   margin-left: 1vw;
+} 
+
 textarea{
    margin-left: 0.6vw;
    width: 30.8vw;

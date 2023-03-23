@@ -30,11 +30,11 @@ export default function EditPhoto() {
     const handleImageChange = (event) => {
       const picture = event.target.files[0];
       const reader = new FileReader();
-      reader.onload = () => {
-        setImg(reader.result);
+      reader.onload = (e) => {
+        setImg(e.target.result);
       };
       reader.readAsDataURL(picture);
-      console.log(picture)
+      console.log(picture);
     };
     
             
@@ -55,14 +55,16 @@ export default function EditPhoto() {
     
     const handleSubmit = async (event) => {
       event.preventDefault();
-      let updatedPhoto = { title, img, description, show };
-      try {
-        await PhotoHandler.updatePhoto(id, updatedPhoto);
-        setAlertVariant("success");
-      } catch (error) {
-        setAlertVariant("danger");
-        setAlertMessage(error.message);
-      }
+    
+      const formData = new FormData();
+      formData.append('image', img);
+      
+    
+      const imageURL = await PhotoHandler.updatePhoto(formData);
+    
+      const updatedPhoto = { title, description, show, imageURL };
+    
+      await PhotoHandler.updatePhoto(id, updatedPhoto);
       setShowAlert(true);
     };
 
@@ -133,4 +135,3 @@ export default function EditPhoto() {
   )
 
 }
-

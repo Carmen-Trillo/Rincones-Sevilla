@@ -45,13 +45,15 @@
 
 #titleCard{
     font-family: 'Cream';
-    font-size: 29px;
+    font-size: 37px;
     padding: 1vh;
+    height: 12vh;
   }
 
 #bodyCard{
     font-size: 10px;
     margin-bottom: 7vh;
+    height: 45vh;
     img{
         width: 12vw;
     }}
@@ -71,10 +73,10 @@
   }
 
 .buttonCard{
-    width: 2.5vw;
-    height: 4.5vh;
+    width: 2.3vw;
+    height: 4.8vh;
     padding: 0.2vw;
-    margin: 0.2vw
+
 }
 .icons{
     width: 1.2vw;
@@ -90,7 +92,7 @@
     }
     #card{
         max-width: 31vw;
-        height: 50vh;
+        height: 45vh;
         margin-right: -1vh;
         margin-top: -15vh;
         margin-bottom: 0;
@@ -124,6 +126,7 @@
         margin: 1vh;
         margin-bottom: 1vh;
         height: 12vh;
+        font-size: 13px;
     }
 
     #buttonsIcons{
@@ -134,15 +137,14 @@
         align-content:space-between;
         max-width: 8vw;
         min-width: 2vw;
-        margin-left: -18vw;
+        margin-top: -20vh;
+        margin-left: 2vw;
       }
 
     .buttonCard{
         min-width: 8vw;
         min-height: 2vh;
-        margin-left: -19vw;
-        margin-right: -19vw;
-    
+
     }
     .icons{
         width: 4vw;

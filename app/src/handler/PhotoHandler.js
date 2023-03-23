@@ -25,15 +25,14 @@ const PhotoHandler = {
     },
     updatePhoto(id, updatedPhoto){
         if (!updatedPhoto) {
-            console.log(updatedPhoto)
             return;
         }
         
         let updatedPhotoStructure = {
             "title": updatedPhoto.title,
             "description": updatedPhoto.description,
-            "img": updatedPhoto.picture,
-            "UpdateDate": new Date(),
+            "img": updatedPhoto.imageURL,
+            "updateDate": new Date(),
             "show": updatedPhoto.show,
             "id": ""
         }

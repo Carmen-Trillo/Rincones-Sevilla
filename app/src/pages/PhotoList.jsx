@@ -13,11 +13,12 @@ import ReactPaginate from "react-paginate";
 import '../../src/index.css';
 import '../styles/PhotoList.css';
 
-export default function Dashboard() {
+export default function PhotoList() {
     const {id} = useParams();
     const [photos, setPhotos] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
+    const { title, img, description}= photos;
 
     useEffect(() => {
         getData();
@@ -44,12 +45,13 @@ export default function Dashboard() {
     const [fullscreen, setFullscreen] = useState(true);
     const [show, setShow] = useState(false);
 
-    function handleShow(breakpoint) {
+    /* function handleShow(breakpoint) {
         setFullscreen(breakpoint);
-        setShow(true);
-      }
+        setShow(true); */
 
-    const [selectedPhotoTitle, setSelectedPhotoTitle] = useState("");
+      const handleClose = () => setShow(false);
+      const handleShow = () => setShow(true);
+
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -76,7 +78,7 @@ export default function Dashboard() {
     console.log(photos)
 
     if (photos.length === 0) {
-        return <div>Loading...</div>;
+        // return <div>Loading...</div>;
     }
 
     return (
@@ -84,6 +86,7 @@ export default function Dashboard() {
             <div style={{ display: 'flex', flexWrap: 'wrap', textAlign: 'center' }}>
             
             {getPageItems(currentPage).map((item) => (
+                item.show === 'Sí' &&
                 <div id='card'
                     key={item.id}
                     
@@ -104,9 +107,7 @@ export default function Dashboard() {
                         </Modal.Body>
 
                         <Modal.Footer id='buttonsIcons'>
-                            <Button className='buttonCard' onClick={() => {
-                            setSelectedPhotoTitle(item.title);
-                            handleShow(v);}}
+                            <Button className='buttonCard' onClick={handleShow}
                             variant="outline-light"><img src={Ver} alt="ver foto" className='icons'/></Button>
                             
                             <Link to={`/EditPhoto/${item.id}`}>
@@ -116,18 +117,32 @@ export default function Dashboard() {
                             <Button className='buttonCard' onClick={() => deleteShort(item.id)} variant="outline-light"><img className='icons' src={Eliminar} alt="eliminar foto"/></Button>
                         </Modal.Footer>
                     </Modal.Dialog>
-                    <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+                    
+                    <Modal
+                        show={show}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                        >
                         <Modal.Header closeButton>
-                        <Modal.Title>{selectedPhotoTitle}</Modal.Title>
+                            <Modal.Title>{item.title.id}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <img
-                            src={item.img}
-                            alt={item.title}
+                        <img
+                            src={item.img.id}
+                            alt={item.title.id}
                             style={{ width: '12vw' }}
                             />
                         </Modal.Body>
-                    </Modal>
+                        <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Cerrar
+                        </Button>
+                        <Button variant="primary">Understood</Button>
+                        </Modal.Footer>
+                        </Modal>
+
+
                 </div>
                 
                

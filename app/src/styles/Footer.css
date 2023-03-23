@@ -1,38 +1,39 @@
-@font-face {
-  font-family: "Atwriter";
-  src: url("./assets/font/atwriter.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-@font-face {
-  font-family: "Jmh";
-  src: url("./assets/font/jmh.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-@font-face {
-  font-family: "Mom";
-  src: url("./assets/font/mom.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-@font-face {
-  font-family: "Rough";
-  src: url("./assets/font/rough.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
 #footer {
   background-color: black;
   display: flex;
   flex-direction: row;
   padding: 1vh;
+  height: 8vh;
 }
 #footer p {
   font-family: "Jmh";
   color: white;
 }
 #footer img {
-  width: 2vw;
+  width: 1.5vw;
   margin-left: 0.5vw;
+}
+
+@media (min-width: 320px) and (max-width: 760px) {
+  #footer {
+    height: 20vw;
+    display: flex;
+    flex-direction: row;
+  }
+  #social {
+    display: flex;
+    flex-direction: row;
+    width: 20vw;
+    text-align: center;
+    margin-left: 3vw;
+  }
+  #social img {
+    width: 4vw;
+    margin-left: 0;
+  }
+  #copyright {
+    width: 80vw;
+    margin-left: 5vw;
+    font-size: 12px;
+  }
 }/*# sourceMappingURL=Footer.css.map */

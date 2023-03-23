@@ -1,27 +1,34 @@
-import React, { useState } from 'react';
-import Pagination from 'react-bootstrap/Pagination';
+/* import React, { useState } from "react";
 
-function PhotoPagination({ photos }) {
-  const [active, setActive] = useState(1);
-  let totalPages = 0;
-  const pageItems = [];
+function Pagination() {
+  const [items, setItems] = useState([...]); // array de elementos a paginar
+  const [currentPage, setCurrentPage] = useState(1); // número de página actual
+  const itemsPerPage = 5; // número de elementos por página
 
-  if (photos && Array.isArray(photos)) {
-    totalPages = Math.ceil(photos.length / 5);
-    for (let number = 1; number <= totalPages; number++) {
-      pageItems.push(
-        <Pagination.Item key={number} active={number === active} onClick={() => setActive(number)}>
-          {number}
-        </Pagination.Item>
-      );
-    }
+  function getCurrentItems() {
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    return items.slice(indexOfFirstItem, indexOfLastItem);
   }
 
+  function handlePageChange(event, value) {
+    setCurrentPage(value);
+  }
+  
+  function handlePageChange(event, value) {
+    setCurrentPage(value);
+  }
+  
   return (
     <div>
-      <Pagination>{pageItems}</Pagination>
+      {getCurrentItems().map(item => (
+        // renderiza cada elemento
+      ))}
+      <div>
+        count={Math.ceil(items.length / itemsPerPage)} // número total de páginas
+        page={currentPage}
+        onChange={handlePageChange}
+      </div>
     </div>
   );
-}
-
-export default PhotoPagination
+} */

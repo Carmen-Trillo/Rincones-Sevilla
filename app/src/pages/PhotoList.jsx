@@ -8,7 +8,6 @@ import Editar from '../assets/img/editar.png';
 import Eliminar from '../assets/img/eliminar.png';
 import { Link } from "react-router-dom";
 import EditPhoto from './EditPhoto';
-import PhotoPagination from "../components/PhotoPagination";
 import PhotoHandler from '../handler/PhotoHandler';
 import '../../src/index.css';
 import '../styles/PhotoList.css';
@@ -16,6 +15,8 @@ import '../styles/PhotoList.css';
 export default function Dashboard() {
 
     const [photos, setPhotos] = useState([]);
+    const [activePage, setActivePage] = useState(1);
+    const photosPerPage = 5;
     useEffect(() => {
         getData();
       }, []);
@@ -26,22 +27,28 @@ export default function Dashboard() {
       };
 
       const deleteShort = async (id) => {
-        setProducts(products.filter((p) => p.id !== id));
-        await ProductHandler.deleteProduct(id);
+        setPhotos(photos.filter((p) => p.id !== id));
+        await PhotoHandler.deletePhoto(id);
       };
 
     console.log(photos)
 
+    /* const startPhotoIndex = (activePage - 1) * photosPerPage;
+    const visiblePhotos = photos.slice(startPhotoIndex, startPhotoIndex + photosPerPage);
+ */
+
     if (photos.length === 0) {
         return <div>Loading...</div>;
     }
-
+    function mediaquery(){
+        let mediaqueryList = window.matchMedia("(max-width: 760px)");
+        if (mediaqueryList.matches){
     return (
         <div id="container">
             <div style={{ display: 'flex', flexWrap: 'wrap', textAlign: 'center' }}>
             
             {photos.map((item) => (
-                // {item.Public === "Sí" &&(
+                // {item.show === "Sí" &&(
                 <div id='card'
                     key={item.id}
                     style={{
@@ -85,10 +92,67 @@ export default function Dashboard() {
                 ))}
             </div>
             <div id='pagination' >
-            <PhotoPagination />
             </div>
         </div>
     
-    );
+    )}else{return(
+        <div id="container">
+            <div style={{ display: 'flex', flexWrap: 'wrap', textAlign: 'center' }}>
+            
+            {photos.map((item) => (
+                // {item.show === "Sí" &&(
+                <div id='card'
+                    key={item.id}
+                    style={{
+                        width: '15vw',
+                        backgroundColor: 'white',
+                        margin: '1vh 2vw',
+                        borderRadius: '5px',
+                        padding: '0.5vh 0.6vw',
+                        height: '62vh',
+                    }}
+                >
+                    <Modal.Dialog>
+                        <Modal.Header>
+                            <Modal.Title style={{fontFamily:'Cream', fontSize: '24px', padding:'1vh'}}>
+                                {item.title}
+                            </Modal.Title>
+                        </Modal.Header>
+
+                        <Modal.Body style={{ fontSize: '12px' }}>
+                            <img
+                                src={item.img}
+                                alt={item.title}
+                                style={{ width: '12vw' }}
+                            />
+                            <p style={{margin: '1vh', height: '10vh', fontSize:'14px'}}>{item.description}</p>
+                        </Modal.Body>
+
+                        <Modal.Footer style={{marginBottom:'0.8vh'}}>
+                            <Button style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} variant="outline-light"><img src={Ver} style={{width:'1.2vw'}} alt="ver foto"/></Button>
+                            
+                            <Link to={`/EditPhoto/${item.id}`}>
+                                <Button style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} onClick={EditPhoto} variant="outline-light"><img src={Editar} style={{width:'1.2vw'}} alt="editar foto"/></Button>
+                            </Link>
+
+                            <Button onClick={() => deleteShort(item.id)} style={{width:'2vw', height: '4.5vh', padding: '0.2vw', margin: '0.2vw'}} variant="outline-light"><img src={Eliminar} style={{width:'1.2vw'}} alt="eliminar foto"/></Button>
+                        </Modal.Footer>
+                    </Modal.Dialog>
+
+                </div>
+               
+                ))}
+            </div>
+            <div id='pagination' >
+            </div>
+        </div>
+    )}
+    }
+    return (
+        <div>
+          {mediaquery()}
+        </div>
+        );
 }
+
 

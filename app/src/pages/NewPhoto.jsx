@@ -68,7 +68,7 @@ function MyForm() {
 
         </fieldset>
 
-        <div id="buttons">
+        <div id="buttons" style={{display:'flex', flexDirection: 'row'}}>
           <input onClick={handleAddClick} id="submit" type="submit" value="GUARDAR" />
           <Link to="/" style={{textDecoration:'none'}}><input id="return" type="button" value="VOLVER" /></Link>
         </div>
@@ -83,7 +83,6 @@ function MyForm() {
             Cerrar
           </Button>
         </div>
-        
       </Alert>
     </form>
     </div>

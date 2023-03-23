@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import PhotoHandler from '../handler/PhotoHandler';
 import Button from 'react-bootstrap/Button';
-import { useLoaderData } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import '../../src/index.css'
@@ -13,7 +12,7 @@ export default function EditPhoto() {
     // const { Photos } = useLoaderData();
 
     const {id} = useParams();
-    const [Photos, setPhotos] = useState([null])
+    const [photos, setPhotos] = useState({});
 
   useEffect(() => {
     async function fetchPhoto() {
@@ -23,22 +22,22 @@ export default function EditPhoto() {
     fetchPhoto();
   }, [id]);
 
-    const [title, setTitle] = useState(Photos.title);
-    const [content, setContent] = useState(Photos.content);
-    const [description, setDescription] = useState(Photos.description);
-    const [isActive, SetIsActive] = useState(Photos.isActive)
-    const [fileExtension, SetFileExtension] = useState(Photos.fileExtension)
+    const [title, setTitle] = useState(photos.title);
+    const [img, setImg] = useState(photos.img);
+    const [description, setDescription] = useState(photos.description);
+    const [show, SetShow] = useState(photos.show);
 
-    const formRef = useRef(null);
-
-    const handleImgChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            setContent(reader.result);
-        };
+    const handleImageChange = (event) => {
+      const picture = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImg(reader.result);
+      };
+      reader.readAsDataURL(picture);
+      console.log(picture)
     };
+    
+            
 
     const handleTitleChange = (event) => {
         let titleInput = event.target.value;
@@ -49,25 +48,27 @@ export default function EditPhoto() {
         setDescription(descriptionInput);
     };
 
-    const handleIsActiveChange = (event) => {
-        let isActiveInput = event.target.value;
-        SetIsActive(isActiveInput);
+    const handleShowChange = (event) => {
+        let showInput = event.target.value;
+        SetShow(showInput);
     };
-    const handleFileExtensionChange = (event) => {
-        let fileExtensionInput = event.target.value;
-        SetFileExtension(fileExtensionInput);
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        let updatedPhoto = { title, content, description, isActive, fileExtension};
-        PhotoHandler.updatePhoto(id, updatedPhoto);
+    
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      let updatedPhoto = { title, img, description, show };
+      try {
+        await PhotoHandler.updatePhoto(id, updatedPhoto);
+        setAlertVariant("success");
+      } catch (error) {
+        setAlertVariant("danger");
+        setAlertMessage(error.message);
+      }
+      setShowAlert(true);
     };
 
     const [showAlert, setShowAlert] = useState(false);
 
     const handleAddClick = () => {
-        formRef.current.reset();
         setShowAlert(true);
     }
 
@@ -75,12 +76,15 @@ export default function EditPhoto() {
         setShowAlert(false);
     }
 
-    const [show, setShow] = useState(false);
+    const [view, setView] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => setView(false);
+    const handleView = () => setView(true);
 
-    if (!Photos) {
+    const [alertVariant, setAlertVariant] = useState("success");
+  const [alertMessage, setAlertMessage] = useState("");
+
+    if (!photos) {
         return <div>Loading...</div>;
       }
 
@@ -89,46 +93,40 @@ export default function EditPhoto() {
     <form onSubmit={handleSubmit} className="form">
       <fieldset>
         <label for="title">Título de la foto</label>
-        <input onChange={handleTitleChange} placeholder={Photos.title} id="title"  />
+        <input onChange={handleTitleChange} placeholder={photos.title} id="title"  />
 
         <label for="description">Descripción de la foto</label>
-        <input onChange={handleDescriptionChange} placeholder={Photos.description} id="description" />
+        <input onChange={handleDescriptionChange} placeholder={photos.description} id="description" />
 
         <label for="show">¿Deseas publicar la foto?</label>
-        <select onChange={handleIsActiveChange} placeholder={Photos.isActive} id="show" name="show" >
+        <select onChange={handleShowChange} placeholder={photos.show} id="show" name="show" >
         <option value="selecciona">selecciona...</option>
         <option value="sí">Sí</option>
         <option value="no">No</option>
         </select>
 
-        <label for="show">Formato de la foto</label>
-        <select onChange={handleFileExtensionChange} placeholder={Photos.fileExtension} id="format" name="format" >
-        <option value="selecciona">selecciona...</option>
-        <option value="jpg">jpg</option>
-        <option value="png">png</option>
-        </select>
-
         <fieldset>
-          <input id="picture" placeholder='Foto del producto' type="file" onChange={handleImgChange} />
+        <input id="picture" placeholder='Foto del producto' type="file" onChange={handleImageChange} />
         </fieldset>
 
       </fieldset>
-            <div style={{display:'flex', flexDirection: 'row'}}>
+            <div id='buttons' style={{display:'flex', flexDirection: 'row'}}>
                 <input onClick={handleAddClick} id="submit" type="submit" value="GUARDAR" />
                 <Link to="/gallery" style={{textDecoration:'none'}}><input id="return" type="button" value="VOLVER" /></Link>
             </div>
 
-      <Alert show={showAlert} variant="success" onClose={handleAlertClose} dismissible>
-        <Alert.Heading style={{color: 'white', textAlign:'center'}}>Foto editada en la base de datos</Alert.Heading>
-        <p style={{color: 'white'}}>
-          ¡Sigamos disfrutando de Sevilla!
+            <Alert show={showAlert} variant={alertVariant} onClose={handleAlertClose} dismissible>
+        <Alert.Heading style={{ color: 'white', textAlign: 'center' }}>{alertVariant === 'success' ? 'Foto actualizada en la base de datos' : 'Error'}</Alert.Heading>
+        <p style={{ color: 'white' }}>
+          {alertMessage}
         </p>
         <hr />
         <div className="d-flex justify-content-end">
-          <Button id="reset" type="reset" style={{height: '4vh', fontFamily: 'Jmh', width: '5vw'}} onClick={handleAlertClose} variant="outline-success">
+          <Button style={{ height: '4vh', fontFamily: 'Jmh', width: '5vw' }} onClick={handleAlertClose} variant="outline-success">
             Cerrar
           </Button>
         </div>
+        
       </Alert>
     </form>
    </div>

@@ -144,3 +144,42 @@ p{
     width: 1rem;
   }
 }
+
+@media (min-width: 320px) and (max-width: 760px){
+
+  form {
+    max-width: 30vw;
+    min-width: 10rem;
+    padding: 4vh 2vw;
+    margin-left: 6vw;
+    font-family: 'Jmh';
+    border-radius: 5px;
+    margin-top: 0;
+}
+  input[type="file"] {
+    padding: 1px 2px;
+    color:white;
+    background-color: #000000;
+    border-radius: 5px;
+    font-family: 'Mom';
+    width: 80vw;
+    margin-top: 2vh;
+    height: 2vh;
+    padding-top: 0.8vh;
+}
+  select {
+    width: 80vw;
+}
+
+#buttons {
+  text-align: center;
+  margin-left: 17vw;
+  width: 12vw;
+  font-size: 12px;
+}
+
+#return {
+  width: 25vw;
+  margin-left: 1vw;
+}
+}

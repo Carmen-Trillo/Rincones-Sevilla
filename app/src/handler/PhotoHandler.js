@@ -9,7 +9,7 @@ const PhotoHandler = {
             "img": newPhoto.picture,
             "insertDate": new Date(),
             "updateDate": new Date(),
-            "public": newPhoto.show,
+            "show": newPhoto.show,
         }
         console.log(photo)
         return PhotoServices.submitPhoto(photo);
@@ -34,7 +34,7 @@ const PhotoHandler = {
             "description": updatedPhoto.description,
             "img": updatedPhoto.picture,
             "UpdateDate": new Date(),
-            "public": updatedPhoto.show,
+            "show": updatedPhoto.show,
             "id": ""
         }
         return PhotoServices.updatePhoto(id, updatedPhotoStructure);

@@ -54,16 +54,16 @@ export default function EditPhoto() {
     };
     
     const handleSubmit = async (event) => {
-      event.preventDefault();
-    
-      const formData = new FormData();
-      formData.append('image', img);
       
-    
+      
+      
+      event.preventDefault();
+      const formData = new FormData();
+      if (img !== photos.img) {
+        formData.append('picture', img);
+      }
       const imageURL = await PhotoHandler.updatePhoto(formData);
-    
       const updatedPhoto = { title, description, show, imageURL };
-    
       await PhotoHandler.updatePhoto(id, updatedPhoto);
       setShowAlert(true);
     };

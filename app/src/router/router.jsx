@@ -5,7 +5,9 @@ import Landing from "../pages/Landing";
 import NewPhoto from "../pages/NewPhoto";
 import EditPhoto from "../pages/EditPhoto";
 import Contact from "../pages/Contact";
+import SeePhoto from '../pages/SeePhoto';
 import PhotoHandler from '../handler/PhotoHandler';
+
 
 
 export const router = createBrowserRouter([
@@ -25,7 +27,12 @@ export const router = createBrowserRouter([
                         path: '/gallery',
                         element: <PhotoList/>,
                         loader: fetchPhotos,
-                    },    
+                    },
+                    {
+                        path: '/seePhoto/:id',
+                        element: <SeePhoto/>,
+                        loader: fetchPhoto,
+                    },     
                     {
                         path: '/editPhoto/:id',
                         element: <EditPhoto />,

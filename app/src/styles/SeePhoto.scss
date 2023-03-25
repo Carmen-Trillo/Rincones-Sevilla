@@ -1,0 +1,38 @@
+#container{
+    background-image: url(../assets/img/filella.jpg);
+    background-position: top; 
+    background-repeat: no-repeat; 
+    background-size: container;
+    background-size: cover;
+    height: 70vh;
+    padding-top: 5vh;
+    width: 100vw;
+    margin-bottom: -4vh;
+}
+
+#conteinerPhoto{
+    width: 80vw;
+    text-align: center;
+}
+
+#titlePhoto{
+    color: white;
+    font-size: 24px;
+    text-align: left;
+    margin-top: -10vh;
+    margin-left: 6vw;
+    margin-bottom: 3vh;
+}
+#imgPhoto{
+    width: 15vw;
+    text-align: left;
+    margin-left: 5vw;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+#return {
+    margin-left: 0;
+    margin-right: 90vw;
+    margin-top: -10vh;
+  }

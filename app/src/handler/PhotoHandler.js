@@ -31,7 +31,7 @@ const PhotoHandler = {
         let updatedPhotoStructure = {
             "title": updatedPhoto.title,
             "description": updatedPhoto.description,
-            "img": updatedPhoto.imageURL,
+            "img": updatedPhoto.picture,
             "updateDate": new Date(),
             "show": updatedPhoto.show,
             "id": ""

@@ -56,7 +56,7 @@ function ContactForm() {
           <textarea name="message" value={toSend.message} onChange={handleChange} />
         </label>
         <br />
-        <input id='submit' type="submit" value="Submit" />
+        <input id='submit' type="submit" value="Enviar" />
       </form>
     </div>
   );

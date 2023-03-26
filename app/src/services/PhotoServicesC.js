@@ -9,7 +9,7 @@ const apiClient = axios.create({
     }
 })
 
-const PhotoServices = {
+const PhotoServicesC = {
     async getPhotos() {
         let response = await apiClient.get("/GetAllPhotos");
         let allPhotos = response.data;
@@ -36,4 +36,4 @@ const PhotoServices = {
     }
 }
 
-export default PhotoServices;
+export default PhotoServicesC;

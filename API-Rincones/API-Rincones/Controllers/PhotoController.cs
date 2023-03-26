@@ -52,7 +52,7 @@ namespace API_Rincones.Controllers
 
         /*[HttpPost(Name = "InsertPhotoFront")]
         [ActionName("InsertPhotoFront")]
-        public async Task<int> InsertPhoto([FromForm] PhotoItem photoItem)
+        public async Task<int> InsertPhoto([FromBody] PhotoItem photoItem)
 
         {
             return await _photoServices.InsertPhotoFront(photoItem);
@@ -62,11 +62,17 @@ namespace API_Rincones.Controllers
         [ActionName("InsertPhotoFront")]
         public async Task<int> InsertPhoto([FromBody] PhotoFromFront photoFromFront)
         {
-            // Decodificamos la cadena base64 del campo "Content"
-            
-            //byte[] contentBytes = Convert.FromBase64String(photoFromFront.Content);
-            //Debugger.Break();
-            //string content = Encoding.UTF8.GetString(contentBytes);
+            /*var photoItem = new PhotoItem
+            {
+                Id = 0,
+                Title = photoFromFront.Title,
+                Description = photoFromFront.Description,
+                InsertDate = DateTime.Now,
+                UpdateDate = DateTime.Now,
+                FileExtension = photoFromFront.FileExtension,
+                IsActive = photoFromFront.IsActive,
+                Content = photoFromFront.Content,
+            };*/
 
 
             return await _photoServices.InsertPhotoFront(photoFromFront);
@@ -121,7 +127,7 @@ namespace API_Rincones.Controllers
         [ActionName("UpdatePhotoFront")]
  
 
-        public async Task Patch(int id, [FromForm] PhotoItem photoItem)
+        public async Task Patch([FromBody] PhotoItem photoItem)
         {
             await _photoServices.UpdatePhotoFront(photoItem);
         }

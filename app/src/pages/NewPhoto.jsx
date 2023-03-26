@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import React, { useState, useRef } from 'react';
 import Alert from 'react-bootstrap/Alert';
-import PhotoHandler from '../handler/PhotoHandler';
+import PhotoHandlerC from '../handler/PhotoHandlerC';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import '../../src/index.css';
@@ -15,14 +15,17 @@ function MyForm() {
   const formRef = useRef(null);
 
  const handleImageChange = (event) => {
-    const picture = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(picture);
-    console.log(picture)
-    reader.onload = () => {
-      setValue("picture", reader.result);
+  const picture = event.target.files[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(picture);
+  console.log(picture)
+  reader.onload = () => {
+    const base64String = reader.result.split(",")[1]; // Obtener la cadena base64 sin la cabecera
+    console.log("ësto es el readeeeeeeeer", base64String);
+    setValue("picture", base64String);
     };console.log(picture)
-  }
+  };
+
 
   const handleAddClick = () => {
     setShowAlert(true);
@@ -35,7 +38,7 @@ function MyForm() {
 
   const onSubmit = async (data) => {
     console.log("ësto es data desde newphoto", data)
-    const response = await PhotoHandler.addPhoto(data);
+    const response = await PhotoHandlerC.addPhoto(data);
     console.log(response);
     setShowAlert(true);
     formRef.current.reset();
@@ -61,6 +64,14 @@ function MyForm() {
             <option value="selecciona">selecciona...</option>
             <option value="Sí">Sí</option>
             <option value="No">No</option>
+          </select>
+          {errors.show && <span>Debe rellenar este campo</span>}
+
+          <label htmlFor="format">¿Qué extensión tiene la foto?</label>
+          <select id="format" name="format" {...register("format", { required: true })}>
+            <option value="selecciona">selecciona...</option>
+            <option value="jpg">jpg</option>
+            <option value="png">png</option>
           </select>
           {errors.show && <span>Debe rellenar este campo</span>}
 

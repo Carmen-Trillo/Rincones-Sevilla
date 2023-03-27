@@ -50,13 +50,6 @@ namespace API_Rincones.Controllers
             return await _photoServices.InsertPhotoAPI(photoItem);
         }
 
-        /*[HttpPost(Name = "InsertPhotoFront")]
-        [ActionName("InsertPhotoFront")]
-        public async Task<int> InsertPhoto([FromBody] PhotoItem photoItem)
-
-        {
-            return await _photoServices.InsertPhotoFront(photoItem);
-        }*/
 
         [HttpPost(Name = "InsertPhotoFront")]
         [ActionName("InsertPhotoFront")]

@@ -35,25 +35,25 @@ function ContactForm() {
 
   return (
     <div style={{marginLeft: '-18vw',}}>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form action="https://formsubmit.co/mctrillon@gmail.com" method="POST">
+        <label for="name">
           Nombre:
-          <input type="text" name="name" value={toSend.name} onChange={handleChange} />
+          <input type="text" name="name" required />
         </label>
         <br />
-        <label>
+        <label for="email">
           Email:
-          <input type="email" name="email" value={toSend.email} onChange={handleChange} />
+          <input type="email" name="email" required/>
         </label>
         <br />
-        <label>
+        <label for="subject">
           Asunto:
-          <input type="text" name="subject" value={toSend.subject} onChange={handleChange} />
+          <input type="text" name="subject" required/>
         </label>
         <br />
-        <label>
+        <label for="message">
           Mensaje:
-          <textarea name="message" value={toSend.message} onChange={handleChange} />
+          <textarea type="text" name="message" col='15' row='5' required/>
         </label>
         <br />
         <input id='submit' type="submit" value="Enviar" />

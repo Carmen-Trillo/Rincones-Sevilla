@@ -50,7 +50,7 @@ function MyForm() {
     <div id='container'>
       <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="form">
         <fieldset>
-          <label htmlFor="title">Título de la foto</label>
+          <label className='title' htmlFor="title">Título de la foto</label>
           <input id="title" {...register("title", { required: true })} />
           {errors.title && <span>Debe rellenar este campo</span>}
 

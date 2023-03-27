@@ -148,15 +148,21 @@ p{
 
 @media (min-width: 320px) and (max-width: 760px){
 
-  form {
-    max-width: 30vw;
-    min-width: 10rem;
+  .form {
+    width: 20vw;
     padding: 4vh 2vw;
-    margin-left: 6vw;
     font-family: 'Jmh';
     border-radius: 5px;
     margin-top: 0;
-}
+    margin-left: 3vw;
+  }
+  #title{
+    margin-left: 2vw;
+  }
+  input, label {
+    width: 60vw;
+    margin-left: -5vw;
+    }
   input[type="file"] {
     padding: 1px 2px;
     color:white;
@@ -174,13 +180,14 @@ p{
 
 #buttons {
   text-align: center;
-  margin-left: 17vw;
-  width: 12vw;
+  margin:auto;
+  width: 25vw;
   font-size: 12px;
+  margin-left: 0;
 }
 
 #return {
   width: 25vw;
-  margin-left: 1vw;
+
 }
 }

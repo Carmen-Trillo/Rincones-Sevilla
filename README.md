@@ -4,6 +4,9 @@
 
 This website only intends to bring Seville closer to those who want to see it from the eyes of someone who loves getting lost in its avenues but, above all, in its narrow streets, discovering the passage of history and life in each corner, and the contribution that each culture has made, leaving its mark on the city, enriching and beautifying it
 
+## ✏️Design:
+<img src=".app/src/assets/img/RinconesSevilla.jpg" alt="Figma" width="50%">
+
 ## 🔧Stacks:
 <ul>
 <li>HTML5</li>
@@ -16,12 +19,13 @@ This website only intends to bring Seville closer to those who want to see it fr
 <li>Boostrap 5</li>
 </ul>
 
-
 ## 👩‍💻Work Approach:
 <ul>
-<li>Por un lado se ha trabajado un back en C#  y se ha trabajado su conexión entre el back y el front, la cual podemos encontrar en el archivo PhotoServiceC y con el archivo PhotoHandlerC<li>
-<li>Created database and API via json-server and created connection via PhotoService and HandlerService files</li>
-<li>The entire front design has been worked on taking into account a connection with the API and the json-server database</li>
+<li>On the one hand, a back has been worked on in C# and its connection between the back and the front has been worked on, which we can find in the PhotoServiceC file and with the PhotoHandlerC file<li>
+<li>On the other hand, a Fake API has been created through the json server and the connection has been created through the PhotoService and HandlerService files, in case you want to work without a C# back</li>
+<li>The Front is currently connected to the C# Back, having to perform transformations on the image since the photos are stored in the database with a base64 string.</li>
+<li>Similarly, when an image is added to the front through the form, another transformation is executed to convert it to a base64 string that the database accepts.</li>
+<li>In the back we have worked taking into account the possibility of loading the photos from the front in the database or adding new elements directly from the API</li>
 <li>Only those photos that have been designated for publication are displayed on the web, the rest of the photos are stored in the database<li>
 </ul>
 
@@ -47,37 +51,39 @@ npm install react-router-dom@6
 npm install react-bootstrap bootstrap
 ```
 
-5. Install React Pginate
+5. Install React Paginate
 ```bash
 npm install react-paginate 
 ```
-6. Install API
+
+6. Install API (in case of working with fake api)
 ```bash
 npm install -g json-server
 ```  
-6. Install Axios
+
+7. Install Axios
 ```bash
 npm install axios
 ```  
+
 8. Install React Form
 ```bash
 npm install react-hook-form 
 ```
-9. Install Contact Form
-```bash
-npm install emailjs-com 
-```
+
 9. Install Test
 ```bash
 npm install --save-dev jest
 npm install --save-dev babel-jest @babel/core @babel/preset-env
 npm install --save-dev ts-jest
 ```
+
 10. Activate the server and keep this terminal open
 ```bash
 npm run dev
 ```   
-11. Activate API
+
+11. Activate API (in case of working with fake api)
 ```bash
 json-server --watch ./api/product.json
 ``` 
@@ -90,9 +96,5 @@ json-server --watch ./api/product.json
 - Solo Programming.
 
 ## 🧪Next Steps:
-- Fix bugs in code.
-- Add modal on "View" button
 - Add favorites and share.
-- Contact seller.
 - Create a tab for the photos saved in the database and that we want to recover and publish
-- Terminate connection to back in C#

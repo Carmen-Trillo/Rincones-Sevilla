@@ -37,7 +37,6 @@ function MyForm() {
   };
 
   const onSubmit = async (data) => {
-    console.log("ësto es data desde newphoto", data)
     const response = await PhotoHandlerC.addPhoto(data);
     console.log(response);
     setShowAlert(true);
@@ -76,8 +75,8 @@ function MyForm() {
           {errors.show && <span>Debe rellenar este campo</span>}
 
           <fieldset>
-            <input id="picture" placeholder='Foto del producto' type="file" onChange={handleImageChange} />
-            {errors.picture && <span>Debe rellenar este campo</span>}
+            <input id="img" placeholder='Foto del producto' type="file" onChange={handleImageChange} />
+            {errors.img && <span>Debe rellenar este campo</span>}
           </fieldset>
 
         </fieldset>

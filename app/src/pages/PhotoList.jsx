@@ -57,13 +57,12 @@ export default function PhotoList() {
     const isMobile = windowWidth <= 768; 
     const originalArray = photos;
 
-
     const itemsPerPage = isMobile ? 2 : 5;
     const getPageItems = (page) => {
         const startIndex = (page - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-        return originalArray.slice(startIndex, endIndex);
-      };
+        return originalArray.filter(item => item.isActive === true).slice(startIndex, endIndex);
+    };
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -78,8 +77,7 @@ export default function PhotoList() {
     return (
         <div id="container">
             <div style={{ display: 'flex', flexWrap: 'wrap', textAlign: 'center' }}>
-            {/* {getPageItems(currentPage) */}
-            {photos.map((item) => (
+            {getPageItems(currentPage).map(item => (
                 <div id='card'
                     key={item.id}>
                     <Modal.Dialog id='cardModal'>

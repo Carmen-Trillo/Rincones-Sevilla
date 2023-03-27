@@ -3,7 +3,7 @@ import PhotoServicesC from "../services/PhotoServicesC";
 const PhotoHandlerC = {
     addPhoto(newPhoto) {
 
-        const active = show === 'Sí' ? 0 : 1;
+        const active = show === 'Sí' ? false : true;
         const extension = format === 'jpg' ? 2 : 1;
 
     
@@ -33,17 +33,20 @@ const PhotoHandlerC = {
             return;
         }
 
-        const active = show === 'Sí' ? 1 : 0;
-        const extension = format === 'jpg' ? 1 : 2;
+        const active = show === 'Sí' ? false : true;
+        const extension = format === 'jpg' ? 2 : 1;
         
         let updatedPhotoStructure = {
-            "Title": updatedPhoto.title,
-            "Description": updatedPhoto.description,
-            "Content": updatedPhoto.imageURL,
-            "UpdateDate": new Date(),
-            "IsActive": active,
-            "FileExtension": extension,
+            "title": updatedPhoto.title,
+            "description": updatedPhoto.description,
+            "content": updatedPhoto.content,
+            "updateDate": new Date(),
+            "isActive": active,
+            "fileExtension": extension,
+            "id": updatedPhoto.id
         }
+        console.log(updatedPhotoStructure)
+
         return PhotoServicesC.updatePhoto(id, updatedPhotoStructure);
     },
 }

@@ -62,18 +62,6 @@ namespace API_Rincones.Controllers
         [ActionName("InsertPhotoFront")]
         public async Task<int> InsertPhoto([FromBody] PhotoFromFront photoFromFront)
         {
-            /*var photoItem = new PhotoItem
-            {
-                Id = 0,
-                Title = photoFromFront.Title,
-                Description = photoFromFront.Description,
-                InsertDate = DateTime.Now,
-                UpdateDate = DateTime.Now,
-                FileExtension = photoFromFront.FileExtension,
-                IsActive = photoFromFront.IsActive,
-                Content = photoFromFront.Content,
-            };*/
-
 
             return await _photoServices.InsertPhotoFront(photoFromFront);
 

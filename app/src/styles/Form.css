@@ -49,7 +49,7 @@ select {
 
 input[type=submit] {
   display: block;
-  width: 10vw;
+  width: 20vw;
   margin: 1em auto;
   height: 2em;
   font-size: 1.1rem;
@@ -58,6 +58,7 @@ input[type=submit] {
   border-radius: 5px;
   color: black;
   font-family: "Mom";
+  margin-left: 5vw;
 }
 
 input[type=reset] {

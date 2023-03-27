@@ -4,9 +4,6 @@
 
 This website only intends to bring Seville closer to those who want to see it from the eyes of someone who loves getting lost in its avenues but, above all, in its narrow streets, discovering the passage of history and life in each corner, and the contribution that each culture has made, leaving its mark on the city, enriching and beautifying it
 
-## ✏️Design:
-<img src=".app/src/assets/img/RinconesSevilla.jpg" alt="Figma" width="50%">
-
 ## 🔧Stacks:
 <ul>
 <li>HTML5</li>

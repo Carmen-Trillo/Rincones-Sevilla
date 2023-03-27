@@ -1,55 +1,55 @@
-import PhotoServices from "../services/PhotoServices";
+import PhotoServicesC from "../services/PhotoServicesC";
 
-const PhotoHandler = {
+const PhotoHandlerC = {
     addPhoto(newPhoto) {
 
-        const active = show === 'Sí' ? 1 : 0;
-        const extension = format === 'jpg' ? 1 : 2;
+        const active = show === 'Sí' ? false : true;
+        const extension = format === 'jpg' ? 2 : 1;
 
     
         let photo = { 
             "title": newPhoto.title,
             "description": newPhoto.description,
-            "img": newPhoto.picture,
+            "content": newPhoto.picture,
             "insertDate": new Date(),
             "updateDate": new Date(),
-            "show": newPhoto.show,
             "isActive": active,
             "fileExtension":extension,
         }
         console.log(photo)
-        return PhotoServices.submitPhoto(photo);
+        return PhotoServicesC.submitPhoto(photo);
     },
     loadPhotos(){
-        return PhotoServices.getPhotos();
+        return PhotoServicesC.getPhotos();
     },
     loadPhoto(id) {
-        return PhotoServices.getPhoto(id);
+        return PhotoServicesC.getPhoto(id);
     },
     deletePhoto(id){
-        return PhotoServices.deletePhoto(id);
+        return PhotoServicesC.deletePhoto(id);
     },
     updatePhoto(id, updatedPhoto){
         if (!updatedPhoto) {
             return;
         }
 
-        const active = show === 'Sí' ? 1 : 0;
-        const extension = format === 'jpg' ? 1 : 2;
+        const active = show === 'Sí' ? false : true;
+        const extension = format === 'jpg' ? 2 : 1;
         
         let updatedPhotoStructure = {
             "title": updatedPhoto.title,
             "description": updatedPhoto.description,
-            "img": updatedPhoto.imageURL,
+            "content": updatedPhoto.content,
             "updateDate": new Date(),
-            "show": updatedPhoto.show,
             "isActive": active,
             "fileExtension": extension,
-            "id": ""
+            "id": updatedPhoto.id
         }
-        return PhotoServices.updatePhoto(id, updatedPhotoStructure);
+        console.log(updatedPhotoStructure)
+
+        return PhotoServicesC.updatePhoto(id, updatedPhotoStructure);
     },
 }
 
-export default PhotoHandler;
+export default PhotoHandlerC;
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
-import PhotoHandler from '../handler/PhotoHandler';
+import PhotoHandlerC from '../handler/PhotoHandlerC';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
@@ -9,33 +9,54 @@ import '../../src/index.css'
 import '../styles/Form.css'
 
 export default function EditPhoto() {
-    // const { Photos } = useLoaderData();
-
     const {id} = useParams();
     const [photos, setPhotos] = useState({});
 
   useEffect(() => {
     async function fetchPhoto() {
-      const photoData = await PhotoHandler.loadPhoto(id);
+      const photoData = await PhotoHandlerC.loadPhoto(id);
       setPhotos(photoData);
     }
     fetchPhoto();
   }, [id]);
 
-    const [title, setTitle] = useState(photos.title);
-    const [img, setImg] = useState(photos.img);
-    const [description, setDescription] = useState(photos.description);
-    const [show, SetShow] = useState(photos.show);
+    const [title, setTitle] = useState(photos.title || '');
+    const [content, setContent] = useState(photos.content || '');
+    const [description, setDescription] = useState(photos.description || '');
+    const [show, setShow] = useState(photos.show || '');
+    const [format, setFormat] = useState(photos.format || '');
+
+  useEffect(() => {
+    
+    if (title === '') {
+      setTitle(photos.title || '');
+    }
+    if (content === '') {
+      setContent(photos.content || '');
+    }
+    if (description === '') {
+      setDescription(photos.description || '');
+    }
+    if (show === '') {
+      setShow(photos.isActive || '');
+    }
+    if (format === '') {
+      setFormat(photos.fileExtension || '');
+    }
+  }, [photos.id, photos.title, photos.content, photos.description, photos.show, photos.format]);
+
 
     const handleImageChange = (event) => {
       const picture = event.target.files[0];
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setImg(e.target.result);
-      };
       reader.readAsDataURL(picture);
-      console.log(picture);
-    };
+      console.log(picture)
+      reader.onload = () => {
+        const base64String = reader.result.split(",")[1]; // Obtener la cadena base64 sin la cabecera
+        console.log("ësto es el readeeeeeeeer", base64String);
+        setContent(base64String);
+        };console.log(picture)
+      };
     
             
 
@@ -50,21 +71,23 @@ export default function EditPhoto() {
 
     const handleShowChange = (event) => {
         let showInput = event.target.value;
-        SetShow(showInput);
+        setShow(showInput);
     };
+
+    const handleFormatChange = (event) => {
+      let formatInput = event.target.value;
+      setFormat(formatInput);
+  };
     
-    const handleSubmit = async (event) => {
+      const handleSubmit = async (event) => {
       event.preventDefault();
-    
-      const formData = new FormData();
-      formData.append('image', img);
+        
+      const updatedPhoto = { id, title, description, show, format, content };
+      console.log(updatedPhoto)
+
       
-    
-      const imageURL = await PhotoHandler.updatePhoto(formData);
-    
-      const updatedPhoto = { title, description, show, imageURL };
-    
-      await PhotoHandler.updatePhoto(id, updatedPhoto);
+
+      await PhotoHandlerC.updatePhoto(id, updatedPhoto);
       setShowAlert(true);
     };
 
@@ -107,9 +130,18 @@ export default function EditPhoto() {
         <option value="no">No</option>
         </select>
 
+        <label htmlFor="format">¿Qué extensión tiene la foto?</label>
+          <select onChange={handleFormatChange} id="format" name="format" placeholder={photos.extension}>
+            <option value="selecciona">selecciona...</option>
+            <option value="jpg">jpg</option>
+            <option value="png">png</option>
+          </select>
+
         <fieldset>
-        <input id="picture" placeholder='Foto del producto' type="file" onChange={handleImageChange} />
+        <label htmlFor="content">Foto de Sevilla</label>
+        <input id="content" placeholder='Foto del producto' type="file" onChange={handleImageChange} />
         </fieldset>
+          
 
       </fieldset>
             <div id='buttons' style={{display:'flex', flexDirection: 'row'}}>

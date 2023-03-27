@@ -16,7 +16,6 @@ namespace Entities.Entities
 {
     public class PhotoFromFront
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Content { get; set; }
@@ -29,9 +28,9 @@ namespace Entities.Entities
         {
             var photoItem = new PhotoItem();
 
-                photoItem.Title = Title ?? string.Empty;
-                photoItem.Description = Description ?? string.Empty;
-                photoItem.Content = Content ?? string.Empty;
+                photoItem.Title = Title;
+                photoItem.Description = Description;
+                photoItem.Content = Content;
                 photoItem.IsActive = IsActive;
                 photoItem.FileExtension = FileExtension;
                 photoItem.UpdateDate = UpdateDate;

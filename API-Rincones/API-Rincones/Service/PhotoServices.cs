@@ -22,8 +22,9 @@ namespace API_Rincones.Services
 
         public async Task<int> InsertPhotoFront(PhotoFromFront photoFromFront)
         {
-            //var photoFromFrontItem = photoFromFront.ToPhotoItem();
-            return await _photoLogic.InsertPhotoFront(photoFromFront.ToPhotoItem());
+            var newPhotoItem = photoFromFront.ToPhotoItem();
+            return await _photoLogic.InsertPhotoFront(newPhotoItem);
+            //return await _photoLogic.InsertPhotoFront(photoItem);
         }
 
         public async Task<List<PhotoItem>> GetAllPhotos()

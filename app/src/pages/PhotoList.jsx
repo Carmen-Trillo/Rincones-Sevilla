@@ -93,9 +93,9 @@ export default function PhotoList() {
                         </Modal.Body>
 
                         <Modal.Footer id='buttonsIcons'>
-                            <Button className='buttonCard' onClick={handleShow}
-                            variant="outline-light"><img src={Ver} alt="ver foto" className='icons'/></Button>
-                            
+                            <Link to={`/SeePhoto/${item.id}`}>
+                                <Button className='buttonCard' variant="outline-light"><img src={Ver} alt="ver foto" className='icons'/></Button>
+                            </Link>
                             <Link to={`/EditPhoto/${item.id}`}>
                                 <Button className='buttonCard' id='edit' onClick={EditPhoto} variant="outline-light"><img className='icons'src={Editar} alt="editar foto"/></Button>
                             </Link>

@@ -1,0 +1,96 @@
+#container {
+  background-image: url(../assets/img/filella.jpg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: container;
+  background-size: cover;
+  height: 70vh;
+  padding-top: 5vh;
+  width: 100vw;
+  margin-bottom: -4vh;
+}
+
+#conteinerPhoto {
+  width: 80vw;
+  text-align: center;
+}
+
+#titlePhoto {
+  color: white;
+  width: 20vw;
+  font-size: 28px;
+  text-align: center;
+  margin-top: -10vh;
+  margin-left: 0;
+  margin-bottom: 3vh;
+  font-family: "Rough";
+}
+
+#descriptionPhoto {
+  color: white;
+  width: 20vw;
+  font-size: 18px;
+  text-align: center;
+  margin-left: 0;
+  margin-bottom: 3vh;
+}
+
+#imgPhoto {
+  width: 20vw;
+  margin-bottom: 10vh;
+  text-align: left;
+  margin-left: 5vw;
+  border-radius: 5px;
+  border: 1px solid white;
+}
+
+#return {
+  margin-left: 5vw;
+  margin-right: 45vw;
+}
+
+@media (min-width: 320px) and (max-width: 760px) {
+  #container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  #containerPhoto {
+    width: 90vw;
+    text-align: center;
+  }
+  #containerInfo {
+    border-radius: 5px;
+    background-color: white;
+    border: 1px black solid;
+  }
+  #titlePhoto {
+    color: black;
+    width: 70vw;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 1vh;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+  #descriptionPhoto {
+    color: black;
+    width: 70vw;
+    font-size: 16px;
+    text-align: center;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+  #imgPhoto {
+    width: 60vw;
+    margin-bottom: 0;
+    text-align: center;
+    margin-left: 0;
+    border-radius: 5px;
+    border: 1px solid white;
+  }
+  #return {
+    margin-left: 24vw;
+    margin-right: 0;
+  }
+}/*# sourceMappingURL=SeePhoto.css.map */
